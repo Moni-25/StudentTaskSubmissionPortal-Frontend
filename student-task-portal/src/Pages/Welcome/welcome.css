@@ -1,0 +1,22 @@
+.welcome{
+    display: flex;
+    background-color: rgb(235, 188, 232);
+
+    >.col-lg-6{
+    width: 50%;
+    height: 100vh;
+    }
+
+    >.image{
+        position: relative;
+        left: 12px;
+    }
+}
+
+.card{
+    position: relative;
+    top: 40%;
+    border-radius: 7px;
+    border: 2px solid rgb(26, 7, 133);
+    color: black;
+} 
