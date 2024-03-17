@@ -1,12 +1,14 @@
 import { useContext } from "react";
 import { taskContext } from "../../Context/getTaskDetailsContext";
 
-export default function TaskDetails({taskval = {}})
+export default function TaskDetails()
 {
     const {taskItem = []} = useContext(taskContext);
     console.log(taskItem)
-    taskItem.map((alltask, index) => {
-        console.log(alltask.task_link, alltask.comments);
+    let keys;
+    taskItem.map((alltask, index1) => {
+        keys={index1}
+        console.log(alltask.task_link, alltask.comments, alltask.studentId.stu_username, alltask.submission_date);
     })
 
     return(

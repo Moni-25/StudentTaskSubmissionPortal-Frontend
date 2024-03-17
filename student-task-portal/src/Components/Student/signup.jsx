@@ -10,7 +10,7 @@ export default function SignUp()
     function handleInputChange(e)
     {
         //e.preventDefault();
-        console.log(e.target.value, e.target.id)
+        //console.log(e.target.value, e.target.id)
         if (e) {
             const formCopy = {
               ...formData,
@@ -32,13 +32,13 @@ export default function SignUp()
             body: JSON.stringify(formData),
         })
         .then((response) => response.json())
-        .then((response) => msg = response.message)
-        .catch((error) => console.log(error))
-        if(msg !== "")
+        .then((response) => {if(response.message === "Student Account Created Successfully!!!")
         {
-            alert("Account Created Successfully");
+            console.log(msg)
+            alert("Task Submitted Successfully");
             navigate("/");
-        }
+        }})
+        .catch((error) => console.log(error));
     }
     return(
         <>
@@ -92,8 +92,24 @@ export default function SignUp()
                             <input type="text" className="form-control" id="phoneNumber" placeholder="+91 9078563412" onChange={handleInputChange}/>
                         </div>
 
+                        <div className="row-lg-12 mt-3 d-flex">
+                            <div className="col-lg-4">
+                                <label htmlFor="coursename" className="form-label">Course Name</label>
+                            </div>
+                            <select class="form-select" aria-label="Default select" id="courseName"
+                                onChange={handleInputChange}>
+                                <option selected>Choose Your Course</option>
+                                <option value="Full Stack Developer - MERN">Full Stack Developer - MERN</option>
+                                <option value="Java">Java</option>
+                                <option value="PHP">PHP</option>
+                                <option value="MySQL">MySQL</option>
+                                <option value="Data Science">Data Science</option>
+                                <option value="Big Data">Big Data</option>
+                            </select>
+                        </div>
+
                         <div className="mt-3 text-center">
-                            <button type="button" className="btn btn-primary" onClick={createAccount}>Login</button>
+                            <button type="button" className="btn btn-primary" onClick={createAccount}>Create Account</button>
                         </div>
                     </div>
                 </div>

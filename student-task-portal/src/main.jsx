@@ -6,6 +6,7 @@ import CourseContextProvider from './Context/roadmapContext.jsx'
 import StudentContextProvider from './Context/getStudentContext.jsx'
 import TaskContextProvider from './Context/getTaskDetailsContext.jsx'
 import MentorContextProvide from './Context/getMentorContext.jsx'
+import AdminContextProvider from './Context/adminContext.jsx'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -14,7 +15,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <CourseContextProvider>
     <TaskContextProvider>
     <MentorContextProvide>
+    <AdminContextProvider>
       <App />
+    </AdminContextProvider>
     </MentorContextProvide>
     </TaskContextProvider>
     </CourseContextProvider>

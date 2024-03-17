@@ -1,17 +1,14 @@
-import { useContext, useEffect, useState } from "react"
-import "./student.css"
-import { Link, Navigate, useNavigate } from "react-router-dom"
-import { studentContext } from "../../Context/getStudentContext";
+import { useContext, useState } from "react";
+import { adminContext } from "../../Context/adminContext";
+import {Link, useNavigate} from "react-router-dom";
 
-export default function Stu()
+export default function Admin()
 {
-    const {studentDetails = []} = useContext(studentContext);
-    console.log(studentDetails)
+    const {admin = []} = useContext(adminContext);
     const navigate = useNavigate();
-
     const [formData, setFormData] = useState({
-        studentUsername: "",
-        studentPassword: ""
+        adminUsername: "",
+        adminPassword: ""
       });
     
     const [errors, setErrors] = useState({});
@@ -32,14 +29,14 @@ export default function Stu()
         const newErrors = {};
     
         // Validate email
-        if (!formData.studentUsername) {
-          newErrors.studentUsername = "Username is required";
+        if (!formData.adminUsername) {
+          newErrors.adminUsername = "Username is required";
           isValid = false;
         }
     
         // Validate password
-        if (!formData.studentPassword) {
-          newErrors.studentPassword = "Password is required";
+        if (!formData.adminPassword) {
+          newErrors.adminPassword = "Password is required";
           isValid = false;
         }
     
@@ -59,22 +56,22 @@ export default function Stu()
             setSubmitted(true); // Set a submitted flag
           }
         console.log("Form data:", formData);
-        const user = formData.studentUsername;
-        const pass = formData.studentPassword;
-        console.log(user, pass, "student", studentDetails);
-        studentDetails.map((stuData, index) => {
-            if(user === stuData.stu_username && pass === stuData.stu_password){
+        const user = formData.adminUsername;
+        const pass = formData.adminPassword;
+        console.log(user, pass, "Admin", admin);
+        admin.map((adminData, index) => {
+            if(user === adminData.admin_user && pass === adminData.admin_pass){
                 login_status = "true";
-                users = stuData.stu_username;
+                users = adminData.admin_user;
             }
         }
         )
-        const data = {users}
+        const data = users
         console.log(login_status)
         if(login_status === "true"){
             console.log(`${users} Login Successfully!!!`);
             alert("Login Successfully!!!");
-            navigate("/student_portal", {state: data});
+            navigate("/admin_portal", {state:{ fromHome: { data }}});
         }
         else{
             console.log("Username or Password Incorrect");
@@ -87,7 +84,7 @@ export default function Stu()
             <div className="row">
             <div className="card border-primary  col-lg-12">
         
-                <h5 className="mt-3 text-center">Student Login</h5>
+                <h5 className="mt-3 text-center">Admin Login</h5>
         
                 <div className="card-body">
                     <div className="">
@@ -96,14 +93,14 @@ export default function Stu()
 
                     <div className="mb-3" style={{display: "flex"}}>
                         <i className="bi bi-person-fill form-control"></i>
-                        <input type="text" className="form-control" id="student_username" name="studentUsername" placeholder="Username"
+                        <input type="text" className="form-control" id="admin_username" name="adminUsername" placeholder="Username"
                             onChange={handleInputChange}/>
                     </div>
 
-                    {errors.studentUsername && 
+                    {errors.adminUsername && 
                         <div className="error mb-2 ms-2" style={{fontSize:"13px", color: "red"}}>
                             <i className="bi bi-exclamation-circle"></i>&nbsp;&nbsp;
-                            {errors.studentUsername}
+                            {errors.adminUsername}
                     </div>}
 
                     <div className="mb-1">
@@ -112,32 +109,22 @@ export default function Stu()
 
                     <div className="mb-3" style={{display: "flex"}}>
                         <i className="bi bi-key-fill form-control"></i>
-                        <input type="password" className="form-control" id="student_password" name="studentPassword" 
+                        <input type="password" className="form-control" id="admin_password" name="adminPassword" 
                             placeholder="Password" required onChange={handleInputChange}/>
                     </div>
 
-                    {errors.studentPassword && 
+                    {errors.adminPassword && 
                         <div className="error mb-2 ms-2" style={{fontSize:"13px", color: "red"}}>
                             <i className="bi bi-exclamation-circle"></i>&nbsp;&nbsp;
-                            {errors.studentPassword}
+                            {errors.adminPassword}
                     </div>}
-
-                    <div className="mt-1 mb-2 text-end">
-                        <a href="">Forgot Password?</a>
-                    </div>
 
                     <div className="mt-3 text-center">
                         <button type="button" className="btn btn-primary" onClick={handleButton}>Login</button>
-                    </div>
-
-                    <div className="mt-3 text-center">
-                        <Link to="/sign_up">
-                            <a>New User? Sign Up Here.....</a>
-                        </Link>
                     </div>
                 </div>
             </div>
             </div>
         </>
-    )
+     )
 }
