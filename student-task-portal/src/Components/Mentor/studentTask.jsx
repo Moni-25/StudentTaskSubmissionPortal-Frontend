@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import { useLocation,Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { useLocation,Link, useNavigate } from "react-router-dom";
 import { studentContext } from "../../Context/getStudentContext";
 import { taskContext } from "../../Context/getTaskDetailsContext";
 
@@ -8,16 +8,56 @@ export default function StudentTaskDetails()
     const location = useLocation();
     const data1  = location.state;
     console.log(data1)
+    const navigate = useNavigate();
     const { studentDetails = [] } = useContext(studentContext);
     const { taskItem = [] } = useContext(taskContext);
     console.log(taskItem)
+    const [formData, setFormData] = useState();
+    let mark = "", comm = "";
     function handleTaskInput(e)
     {
-
+        mark = document.getElementById("task_mark").value;
+        comm = document.getElementById("mentor_comment").value;
+        console.log(e.target.value)
+        if (e) {
+            const formCopy = {
+              ...formData,
+            };
+            formCopy[e.target.id] = e.target.value;
+            setFormData(formCopy);
+          }
+          console.log("hi",mark, comm)
     }
-    function handleTaskSumbission()
+    console.log("hi",mark, comm)
+    function handleMentor(e)
     {
-
+        e.preventDefault();
+        console.log(e.target.value, e.target.id)
+        let taskId = 0;
+        let taskname = document.getElementById("taskName").value;
+        console.log(taskname);
+        taskItem.map((taskVal,i) => {
+            if(taskname === taskVal.task_name)
+            {
+                taskId = taskVal._id;            
+            }
+        })
+        console.log(taskId)
+        fetch(`http://localhost:5000/api/task/update/${taskId}`,{
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            method: "PATCH",
+            body: JSON.stringify(formData),
+        })
+        .then((response) => response.json())
+        .then((response) => {if(response.message === "Task Reviewed Successfully!!!!"){
+            alert(`${data1} task had reviewed successfully`);
+            //navigate("/student_task", {state:  data1})
+            window.location.reload();
+        }})
+        .catch((error) => console.log(error))
     }
     return(
         <>
@@ -68,7 +108,7 @@ export default function StudentTaskDetails()
                     <div className="card-body">
                         <div className="row-lg-12 mt-2 d-flex">
                             <div className="col-lg-3">
-                                <label htmlFor="mentor_username" className="form-label" style={{fontSize:"16px"}}>
+                                <label htmlFor="" className="form-label" style={{fontSize:"16px"}}>
                                     Student Name
                                 </label>
                             </div>
@@ -76,7 +116,7 @@ export default function StudentTaskDetails()
                                 <span style={{fontWeight:"700"}}>:</span>
                             </div>
                             <div className="col-lg-8">
-                                <label htmlFor="mentor_username" className="form-label" style={{fontWeight: "600", fontSize:"17px"}}>
+                                <label htmlFor="" className="form-label" style={{fontWeight: "600", fontSize:"17px"}}>
                                     {stuData.studentFullName}
                                 </label>
                             </div>
@@ -84,7 +124,7 @@ export default function StudentTaskDetails()
 
                         <div className="row-lg-12 mt-2 d-flex">
                             <div className="col-lg-3">
-                                <label htmlFor="mentor_username" className="form-label" style={{fontSize:"16px"}}>
+                                <label htmlFor="" className="form-label" style={{fontSize:"16px"}}>
                                     Email
                                 </label>
                             </div>
@@ -92,7 +132,7 @@ export default function StudentTaskDetails()
                                 <span style={{fontWeight:"700"}}>:</span>
                             </div>
                             <div className="col-lg-8">
-                                <label htmlFor="mentor_username" className="form-label" style={{fontWeight: "600", fontSize:"17px"}}>
+                                <label htmlFor="" className="form-label" style={{fontWeight: "600", fontSize:"17px"}}>
                                     {stuData.email}
                                 </label>
                             </div>
@@ -100,7 +140,7 @@ export default function StudentTaskDetails()
 
                         <div className="row-lg-12 mt-2 d-flex">
                             <div className="col-lg-3">
-                                <label htmlFor="mentor_username" className="form-label" style={{fontSize:"16px"}}>
+                                <label htmlFor="" className="form-label" style={{fontSize:"16px"}}>
                                     Course
                                 </label>
                             </div>
@@ -108,7 +148,7 @@ export default function StudentTaskDetails()
                                 <span style={{fontWeight:"700"}}>:</span>
                             </div>
                             <div className="col-lg-8">
-                                <label htmlFor="mentor_username" className="form-label" style={{fontSize:"17px", fontWeight:"700"}}>
+                                <label htmlFor="" className="form-label" style={{fontSize:"17px", fontWeight:"700"}}>
                                     {stuData.courseName}
                                 </label>
                             </div>
@@ -121,6 +161,8 @@ export default function StudentTaskDetails()
                         submission_link,
                         task_link, 
                         comments, 
+                        mentor_comment,
+                        task_mark,
                         studentId}, i) => (data1 === studentId.studentFullName ?
                         <div className="card-body ms-4 mb-3" style={{width: "42rem", border: "2px solid #aaff80", borderRadius: "12px"}}>
                             <div className="row-lg-12 ms-1 d-flex">
@@ -134,7 +176,8 @@ export default function StudentTaskDetails()
                             </div>
                             <div className="col-lg-8">
                                 <label htmlFor="" className="form-label" style={{fontSize:"16px", fontWeight: "700"}}>
-                                    {task_name} 
+                                    {task_name}
+                                    <input type="text" className="form-control" id="taskName" value={task_name} required hidden readOnly/>
                                 </label>
                             </div>
                             </div>
@@ -200,7 +243,8 @@ export default function StudentTaskDetails()
                                 </label>
                             </div>
                             </div>
-
+                            
+                            {task_mark === undefined ?
                             <div className="row-lg-12 ms-1 mt-1 d-flex">
                             <div className="col-lg-3">
                                 <label htmlFor="" className="form-label" style={{fontSize:"16px"}}>
@@ -212,19 +256,82 @@ export default function StudentTaskDetails()
                                 <span style={{fontWeight:"700"}}>:</span>
                             </div>
                             <div className="col-lg-8">
-                            <input type="text" className="form-control" id="comments" placeholder="Leave Your Mark out of 10" 
+                            <input type="text" className="form-control" id="task_mark" placeholder="Leave Your Mark out of 10" 
+                                    required style={{fontSize: "16px", width:"100%", height: "50px", borderRadius: "10px"}}
+                                    onChange={handleTaskInput}/>
+                            </div>
+                            </div>
+                            :
+                            <div className="row-lg-12 ms-1 mt-1 d-flex">
+                            <div className="col-lg-3">
+                                <label htmlFor="" className="form-label" style={{fontSize:"16px"}}>
+                                    Task Mark <span style={{color:"red", fontSize: "20px"}}>*</span>
+                                </label>
+                                <p style={{color: "red", fontSize: "13px"}}>Note: Evaluate task and give mark out of 10</p>
+                            </div>
+                            <div className="col-lg-1">
+                                <span style={{fontWeight:"700"}}>:</span>
+                            </div>
+                            <div className="col-lg-8">
+                            <input type="text" className="form-control" id="task_mark" value={task_mark} 
+                                    required style={{fontSize: "16px", width:"100%", height: "50px", borderRadius: "10px"}}
+                                    disabled readOnly/>
+                            </div>
+                            </div>
+                            }
+
+                            {mentor_comment === undefined ?
+                            <div className="row-lg-12 ms-1 mt-1 d-flex">
+                            <div className="col-lg-3">
+                                <label htmlFor="" className="form-label" style={{fontSize:"16px"}}>
+                                    Comments <span style={{color:"red", fontSize: "20px"}}>*</span>
+                                </label>
+                            </div>
+                            <div className="col-lg-1">
+                                <span style={{fontWeight:"700"}}>:</span>
+                            </div>
+                            <div className="col-lg-8">
+                            <input type="text" className="form-control" id="mentor_comment" placeholder="Enter Task Comments"
                                     required style={{fontSize: "16px", width:"100%", height: "60px", borderRadius: "10px"}}
                                     onChange={handleTaskInput}/>
                             </div>
                             </div>
+                            :
+                            <div className="row-lg-12 ms-1 mt-1 d-flex">
+                            <div className="col-lg-3">
+                                <label htmlFor="" className="form-label" style={{fontSize:"16px"}}>
+                                    Comments <span style={{color:"red", fontSize: "20px"}}>*</span>
+                                </label>
+                            </div>
+                            <div className="col-lg-1">
+                                <span style={{fontWeight:"700"}}>:</span>
+                            </div>
+                            <div className="col-lg-8">
+                            <input type="text" className="form-control" id="mentor_comment" value={mentor_comment}
+                                    required style={{fontSize: "16px", width:"100%", height: "60px", borderRadius: "10px"}}
+                                    disabled readOnly/>
+                            </div>
+                            </div>
+                            }
 
-                            <div className="text-center">
+                            {task_mark === undefined && mentor_comment === undefined ?
+                            <div className="text-center mt-3">
                                 <button type="button" className="btn btn-outline-primary" 
                                     style={{width: "15%", color: "black", fontWeight: "bold"}}
-                                        onClick={handleTaskSumbission}>
+                                        onClick={handleMentor}>
                                     Submit
                                 </button>
                             </div>
+                            :
+                            <div className="text-center mt-3">
+                            <button type="button" className="btn btn-outline-primary" 
+                                style={{width: "15%", color: "black", fontWeight: "bold"}}
+                                    hidden>
+                                Submit
+                            </button>
+                        </div>
+                        }
+                            
                         </div>
                     : ""))}
                 </div>

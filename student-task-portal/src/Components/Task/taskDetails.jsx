@@ -8,7 +8,8 @@ export default function TaskDetails()
     let keys;
     taskItem.map((alltask, index1) => {
         keys={index1}
-        console.log(alltask.task_link, alltask.comments, alltask.studentId.stu_username, alltask.submission_date);
+        console.log(alltask.task_link, alltask.comments, alltask.studentId.stu_username, 
+            alltask.submission_date, alltask.task_mark);
     })
 
     return(
@@ -40,9 +41,15 @@ export default function TaskDetails()
                         <span style={{fontWeight: "700", color: " #7575a3", fontSize: "18px"}}>
                             Submitted On {alltask.submission_date}<br></br>
                         </span>
-                        <span style={{fontWeight: "700", color: " #ff3333", fontSize: "15px"}}>
-                            yet to be graded
-                        </span>
+                        {alltask.task_mark === undefined ?
+                            <span style={{fontWeight: "700", color: " #ff3333", fontSize: "15px"}}>
+                                yet to be graded
+                            </span>
+                        :
+                            <span style={{fontWeight: "700", color: " #ff3333", fontSize: "15px"}}>
+                                {alltask.task_mark}
+                            </span>
+                        }
                         </div>
                     </div>
                 </div>

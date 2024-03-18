@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { studentContext } from "../../Context/getStudentContext";
+import { taskContext } from "../../Context/getTaskDetailsContext";
 
 export default function Task({val = {}})
 {
@@ -12,10 +13,11 @@ export default function Task({val = {}})
     const navigate = useNavigate();
 
     const {studentDetails = []} = useContext(studentContext);
+    const {taskItem = []} = useContext(taskContext)
 
     // Handle Task Input
     const [taskData, setTaskData] = useState();
-    var login_status = "false", stuId;
+    var login_status = "false", stuId, taskId;
 
     var today = new Date();
     var dd = today.getDate();
@@ -33,11 +35,12 @@ export default function Task({val = {}})
     today = dd+'/'+mm+'/'+yyyy;
 
     var taskStatus = "Submitted";
-
+    
     function handleTaskInput(e)
     {
         //e.preventDefault();
         console.log(e.target.id, e.target.value);
+        console.log(taskItem.length)
         studentDetails.map((task, index) => {
             if(data === task.studentFullName){
                 login_status = "true";
@@ -46,8 +49,8 @@ export default function Task({val = {}})
             }
         }
         )
-        let submit = document.getElementById("submission_link").value;
-        console.log(submit)
+        let submit = document.getElementById("task_link").getAttribute("href");
+        console.log("Submit", submit)
         if (e) {
             const taskCopy = {
               ...taskData,
@@ -71,22 +74,49 @@ export default function Task({val = {}})
         // const comms = document.getElementById("comments").value;
         // console.log(taskLink, comms);
         //e.preventDefault();
-        fetch("http://localhost:5000/api/task/submit",{
-            method: "POST",
+        taskItem.map((t, i) => {
+            if(val === t.task_name)
+            {
+                taskId = t._id
+                console.log("TaskId", taskId)
+            }
+        })
+        if(taskItem.length === 0)
+        {
+            fetch("http://localhost:5000/api/task/submit",{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(taskData),
+            })
+            .then((response) => response.json())
+            .then((response) => {if(response.message === "Task Submitted Successfully!!!")
+            {
+                console.log(msg)
+                alert(`Hi ${data}, You had submitted task successfully!!!`);
+                navigate("/class", {state:{fromHome: { data }}});
+                window.location.reload();
+            }})
+            .catch((error) => console.log(error))
+        }
+        else{
+            fetch(`http://localhost:5000/api/task/update_stutask/${taskId}`,{
             headers: {
+                Accept: "application/json",
                 "Content-Type": "application/json",
             },
+            method: "PATCH",
             body: JSON.stringify(taskData),
         })
         .then((response) => response.json())
-        .then((response) => {if(response.message === "Task Submitted Successfully!!!")
-        {
-            console.log(msg)
-            alert("Task Submitted Successfully");
+        .then((response) => {if(response.message === "Task Submiited Successfully!!!!"){
+            alert(`Hi ${data}, Your task has been resubmitted successfully!!!`);
             navigate("/class", {state:{fromHome: { data }}});
+            window.location.reload();
         }})
         .catch((error) => console.log(error))
-        
+        }
     }
 
     return(
