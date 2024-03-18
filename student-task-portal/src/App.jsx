@@ -17,6 +17,9 @@ import Admin from './Pages/Admin/admin'
 import AdminPortal from './Components/Admin/adminPortal'
 import AssignMentor from './Components/Admin/assignMentor'
 import MentorLogin from './Pages/Mentor/mentorLogin'
+import MentorPortal from './Components/Mentor/mentorPortal'
+import StuList from './Components/Mentor/stuList'
+import StudentTaskDetails from './Components/Mentor/studentTask'
 
 
 function App() {
@@ -33,9 +36,12 @@ function App() {
         <Route Component={CourseMap} path='/course_map'/>
         <Route Component={Student} path='/student'/>
         <Route Component={StudentPortal} path='/student_portal'/>
+        <Route Component={StudentTaskDetails} path='/student_task'/>
         <Route Component={SignUp} path='/sign_up'/>
         <Route Component={Mentor} path='/mentor'/>
         <Route Component={MentorLogin} path='/mentor_login'/>
+        <Route Component={MentorPortal} path='/mentor_portal'/>
+        <Route Component={StuList} path='/stu_list'/>
         <Route Component={Dashboard} path='/dashboard'/>
         <Route Component={ClassDetails} path='/class'/>
         <Route Component={ClassBody} path='/class_body'/>

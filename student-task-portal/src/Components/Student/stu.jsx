@@ -73,7 +73,7 @@ export default function Stu()
         console.log(login_status)
         if(login_status === "true"){
             console.log(`${users} Login Successfully!!!`);
-            alert("Login Successfully!!!");
+            alert(`${users} Logged In Successfully!!!`);
             navigate("/student_portal", {state: data});
         }
         else{

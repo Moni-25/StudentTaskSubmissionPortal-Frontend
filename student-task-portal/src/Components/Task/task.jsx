@@ -2,12 +2,12 @@ import { useContext, useState } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { studentContext } from "../../Context/getStudentContext";
 
-export default function Task({state = {}})
+export default function Task({val = {}})
 {
     const location = useLocation();
     const { fromHome } = location.state;
     let data = fromHome.data;
-    console.log("Day1-Task",data);
+    console.log("Day1-Task",data, val);
 
     const navigate = useNavigate();
 
@@ -46,12 +46,16 @@ export default function Task({state = {}})
             }
         }
         )
+        let submit = document.getElementById("submission_link").value;
+        console.log(submit)
         if (e) {
             const taskCopy = {
               ...taskData,
               studentId: stuId,
               submission_date: today,
-              task_status: taskStatus
+              task_status: taskStatus,
+              task_link: submit,
+              task_name: val
             };
             taskCopy[e.target.id] = e.target.value;
             setTaskData(taskCopy);
@@ -92,7 +96,7 @@ export default function Task({state = {}})
                     <div className="row-lg-12 d-flex">
                         <div className="col-lg-10">
                             <a href="https://docs.google.com/document/d/1QznT1zM4mI6dG0TODx5Xjs1GquMoSHO3xZ1USDnVM-w/preview"
-                                style={{fontFamily: "sans-serif", fontSize: "16px"}}>
+                            id="task_link"  style={{fontFamily: "sans-serif", fontSize: "16px"}}>
                                 https://docs.google.com/document/d/1QznT1zM4mI6dG0TODx5Xjs1GquMoSHO3xZ1USDnVM-w/preview</a>
                         </div>
                         <div className="col-lg-2">
@@ -111,7 +115,7 @@ export default function Task({state = {}})
                     <div className="card-body">
                         <div className="mb-3">
                             <label htmlFor="link" className="form-label" style={{fontWeight: "600", color: "#3333ff"}}>Front-end Source Code</label>
-                            <input type="text" className="form-control form-control-lg" id="task_link" 
+                            <input type="text" className="form-control form-control-lg" id="submission_link" 
                                 placeholder="Enter Front-end Source Code Link" required 
                                 style={{fontSize: "16px", width:"100%", height: "45px", borderRadius: "10px"}}
                                     onChange={handleTaskInput}/>

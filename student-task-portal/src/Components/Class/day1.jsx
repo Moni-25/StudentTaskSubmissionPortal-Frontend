@@ -8,6 +8,7 @@ export default function ClassOne()
     const { fromHome } = location.state;
     let data = fromHome.data;
     console.log("Day1",data);
+    let name = "JavaScript - Day -1: Introduction to Browser & web";
     return(
         <>
             <nav className="navbar navbar-expand-lg bg-primary">
@@ -64,7 +65,7 @@ export default function ClassOne()
                     <div className="container">
                         <div className="card ms-4 mt-5" style={{width: "50rem", padding: "0px", border: "2px solid #bfbfbf"}}>
                             <div className="card-header mt-2">
-                                <h5 style={{fontWeight: "600", color: "#3333ff"}}>JavaScript - Day -1: Introduction to Browser & web</h5>
+                                <h5 id="taskName" style={{fontWeight: "600", color: "#3333ff"}}>JavaScript - Day -1: Introduction to Browser & web</h5>
                             </div>
                             <div className="card-body">
                                 <h6 style={{fontWeight: "550"}}>Contents:</h6>
@@ -101,7 +102,7 @@ export default function ClassOne()
                 <div className="col-lg-8">
                     <div className="container">
                     <h5 style={{fontWeight: "600", color: "#3333ff"}} className="ms-4 mt-3">Task Submission</h5>
-                    <Task state={{ fromHome: { data }}}/>
+                    <Task state={{ fromHome: { data }}} val={name}/>
                     </div>
                 </div>
             </div>

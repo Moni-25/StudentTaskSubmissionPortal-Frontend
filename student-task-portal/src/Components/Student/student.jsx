@@ -1,8 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import "./student.css"
 import { Link, Navigate, useNavigate } from "react-router-dom"
-import ClassDetails from "../../Pages/Class/class";
-import StudentPortal from "./studentPortal";
 import { studentContext } from "../../Context/getStudentContext";
 
 export default function Student()

@@ -70,7 +70,7 @@ export default function Admin()
         console.log(login_status)
         if(login_status === "true"){
             console.log(`${users} Login Successfully!!!`);
-            alert("Login Successfully!!!");
+            alert(`${users} Login Successfully!!!`);
             navigate("/admin_portal", {state:{ fromHome: { data }}});
         }
         else{

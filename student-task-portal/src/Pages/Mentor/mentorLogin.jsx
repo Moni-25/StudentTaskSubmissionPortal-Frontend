@@ -71,7 +71,7 @@ export default function MentorLogin()
         if(login_status === "true"){
             console.log(`${users} Login Successfully!!!`);
             alert(`${users} Logged In Successfully!!!`);
-            navigate("/");
+            navigate("/mentor_portal", {state:{ fromHome: { data }}});
         }
         else{
             console.log("Username or Password Incorrect");
