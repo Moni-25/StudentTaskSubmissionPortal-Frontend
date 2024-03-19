@@ -13,13 +13,14 @@ export default function AssignMentor()
     const {studentDetails = []} = useContext(studentContext);
     const {mentorDetails = []} = useContext(mentorContext);
     const [formData, setFormData] = useState();
+    const [courseData, setCourse] = useState();
   
     const [userinfo, setUserInfo] = useState({
         languages: [],
         response: [],
     });
 
-    var stu_id = [], men_id = 0;
+    var stu_id = [], men_id = 0, stu_course = [];
 
     function handleCheckBoxChange(e)
     {
@@ -58,6 +59,7 @@ export default function AssignMentor()
                 if(userinfo.languages[i] == stuVal.studentFullName)
                 {
                     stu_id[i] = stuVal._id;
+                    stu_course[i] = stuVal.courseName;
                     //console.log(stu_id, stuVal.studentFullName)
                     break;
                 }}      
@@ -78,9 +80,9 @@ export default function AssignMentor()
             };
             formCopy[e.target.id] = e.target.value;
             setFormData(formCopy);
-          }    
+          } 
     }
-    var msg = "";
+    var msg = "", a = 1;
     function assignMentor(e)
     {
         //e.preventDefault();
@@ -104,6 +106,17 @@ export default function AssignMentor()
         // .then((response) => response.json())
         // .then((response) => console.log(response))
         // .catch((error) => console.log(error))
+        fetch("http://localhost:5000/api/auth/update_mentor",{
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            method: "PATCH",
+            body: JSON.stringify(formData),
+        })
+        .then((response) => response.json())
+        .then((response) => console.log(response))
+        .catch((error) => console.log(error))
         fetch("http://localhost:5000/api/mentor/assign_mul_students",{
             headers: {
                 Accept: "application/json",
@@ -116,6 +129,7 @@ export default function AssignMentor()
         .then((response) => {if(response.message === "Students Added Successfully!!!!"){
             alert("Mentor Assigned Successfully");
             navigate("/admin_portal", {state:{ fromHome: { data }}})
+            window.location.reload();
         }})
         .catch((error) => console.log(error))
     }
@@ -180,23 +194,24 @@ export default function AssignMentor()
                                 )}
                             </select> */}
                             <div className="form-check m-3 col-lg-8">
-                            {studentDetails.map(item => 
+                            {studentDetails.map(({studentFullName, courseName, mentorId}, i) => 
+                            (mentorId === undefined ?
                             <div>
                                 <input
                                 className="form-check-input"
                                 type="checkbox"
                                 name="languages"
-                                value={item.studentFullName}
+                                value={studentFullName}
                                 id="courseName"
                                 onChange={
                                             handleCheckBoxChange
                                         }
                                 />
                                 <label className="form-check-label" htmlFor="courseName">
-                                    {item.studentFullName} - {item.courseName}
+                                    {studentFullName} - {courseName}
                                 </label>
                             </div>
-                            )}
+                            : ""))}
                             </div>
                         </div>
 
@@ -206,11 +221,14 @@ export default function AssignMentor()
                                     Mentor
                                 </label>
                             </div>
+                            
                             <select className="form-select" aria-label="Default select" id="mentorName" onChange={handleInputChange}>
                                 <option value="" selected>Choose Mentor For Student</option>
-                                {mentorDetails.map((mentorData, index) => 
-                                    <option value={mentorData.studentFullName}>{mentorData.mentorName}</option>
-                                )}
+                                {mentorDetails.map(({mentorName, studentId}, index) => 
+                                (studentId.length === 0 ? 
+                                    <option value={mentorName}>{mentorName}</option>
+                                    : ""
+                                ))}
                             </select>
                         </div>
 

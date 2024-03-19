@@ -7,7 +7,8 @@ export default function StudentTaskDetails()
 {
     const location = useLocation();
     const data1  = location.state;
-    console.log(data1)
+    console.log(data1.stu, data1.mentor)
+    const data = data1.mentor;
     const navigate = useNavigate();
     const { studentDetails = [] } = useContext(studentContext);
     const { taskItem = [] } = useContext(taskContext);
@@ -29,6 +30,13 @@ export default function StudentTaskDetails()
           console.log("hi",mark, comm)
     }
     console.log("hi",mark, comm)
+    var no_record = "false";
+    {taskItem.map(({studentId},i) => {
+        if(data1.stu !== studentId.studentFullName)
+        {
+            no_record = "true";
+        }
+    })}
     function handleMentor(e)
     {
         e.preventDefault();
@@ -53,7 +61,7 @@ export default function StudentTaskDetails()
         })
         .then((response) => response.json())
         .then((response) => {if(response.message === "Task Reviewed Successfully!!!!"){
-            alert(`${data1} task had reviewed successfully`);
+            alert(`${data1.stu} task had reviewed successfully`);
             //navigate("/student_task", {state:  data1})
             window.location.reload();
         }})
@@ -61,7 +69,7 @@ export default function StudentTaskDetails()
     }
     return(
         <>
-             {/* <nav className="navbar navbar-expand-lg bg-primary">
+             <nav className="navbar navbar-expand-lg bg-primary">
                 <div className="container-fluid">
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" 
                         aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation"
@@ -71,28 +79,23 @@ export default function StudentTaskDetails()
                 <div className="collapse navbar-collapse" tabindex="-1" id="navbarToggler" aria-labelledby="offcanvasDarkNavbarLabel"> 
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <Link to="/assign_mentor" state={{ fromHome: { data }}} style={{textDecoration: "none"}}>
-                                <a className="nav-link" href="#">
-                                <i className="bi bi-person-circle"></i>
-                                        &nbsp;&nbsp;Profile
-                                </a>
-                            </Link>
-                        </li>   
-                        <li className="nav-item">
-                        <Link to="/stu_list" state={{ fromHome: { data }}} style={{textDecoration: "none"}}>
                             <a className="nav-link active" aria-current="page" href="#">
-                            <i className="bi bi-list-task"></i>
-                                    &nbsp;&nbsp;Student List
+                            <i class="bi bi-file-earmark-bar-graph-fill"></i>
+                                    &nbsp;&nbsp;Student Task Evaluation
                             </a>
-                        </Link>
                         </li>  
                     </ul>
-                    <span className="navbar-brand" href="#">{data}</span>
+                    <span className="navbar-brand" href="#">{data1.mentor}</span>
                 </div>
                 </div>
-            </nav> */}
+            </nav>
             <div className="container">
-                <div className="col-lg-12 mt-4" style={{padding: "0px"}}>
+                <Link to="/stu_list" state={{ fromHome: { data }}} style={{textDecoration: "none"}}>
+                    <button type="button" class="btn btn-primary" style={{fontSize: "18px", width: "8%", marginLeft: "18%", marginTop: "2%"}}>
+                    <i class="bi bi-caret-left-fill"></i>&nbsp;Back
+                    </button>
+                </Link>
+                <div className="col-lg-12" style={{padding: "0px", marginTop: "2%"}}>
                 <div className="card" style={{
                         width: "45rem", 
                         borderColor: "#bf80ff", 
@@ -103,8 +106,10 @@ export default function StudentTaskDetails()
                         transform: "translate(-50%, 0%)"
                         }}>
             
-                    <h5 className="mt-3 text-center" style={{fontWeight: "700"}}>Task Evaluation</h5>
-                    {studentDetails.map((stuData, i) => (data1 === stuData.studentFullName ?
+                    <div className="mt-3 text-center text-header" style={{marginLeft: "25%", fontSize: "20px", fontWeight: "700", backgroundColor: "#668cff", width: "50%", height: "35px"}}>
+                        Task Evaluation
+                    </div>
+                    {studentDetails.map((stuData, i) => (data1.stu === stuData.studentFullName ?
                     <div className="card-body">
                         <div className="row-lg-12 mt-2 d-flex">
                             <div className="col-lg-3">
@@ -163,7 +168,7 @@ export default function StudentTaskDetails()
                         comments, 
                         mentor_comment,
                         task_mark,
-                        studentId}, i) => (data1 === studentId.studentFullName ?
+                        studentId}, i) => (data1.stu === studentId.studentFullName ?
                         <div className="card-body ms-4 mb-3" style={{width: "42rem", border: "2px solid #aaff80", borderRadius: "12px"}}>
                             <div className="row-lg-12 ms-1 d-flex">
                             <div className="col-lg-3">
@@ -334,8 +339,12 @@ export default function StudentTaskDetails()
                             
                         </div>
                     : ""))}
-                </div>
-                </div>
+                {no_record === "true" ? 
+                        <div className="card-body ms-4 mb-3" style={{width: "42rem", border: "2px solid #aaff80", borderRadius: "12px"}}>
+                            <h6 style={{fontWeight: "700"}}>No Task Submitted</h6>
+                        </div> : ""} 
+                </div>  
+                </div>         
             </div>
         </>
      )

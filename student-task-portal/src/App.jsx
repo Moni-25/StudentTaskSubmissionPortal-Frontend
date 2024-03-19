@@ -20,6 +20,7 @@ import MentorLogin from './Pages/Mentor/mentorLogin'
 import MentorPortal from './Components/Mentor/mentorPortal'
 import StuList from './Components/Mentor/stuList'
 import StudentTaskDetails from './Components/Mentor/studentTask'
+import ClassTwo from './Components/Class/day2'
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
         <Route Component={ClassDetails} path='/class'/>
         <Route Component={ClassBody} path='/class_body'/>
         <Route Component={ClassOne} path='/day1'/>
+        <Route Component={ClassTwo} path='/day2'/>
         <Route Component={TaskSubmit} path='task_submit'/>
       </Routes>
     </>

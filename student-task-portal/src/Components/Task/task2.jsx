@@ -3,12 +3,12 @@ import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { studentContext } from "../../Context/getStudentContext";
 import { taskContext } from "../../Context/getTaskDetailsContext";
 
-export default function Task({val = {}})
+export default function Task({daytwo = {}})
 {
     const location = useLocation();
     const { fromHome } = location.state;
     let data = fromHome.data;
-    console.log("Day1-Task",data, val);
+    console.log("Day2-Task",data, daytwo);
 
     const navigate = useNavigate();
 
@@ -16,19 +16,8 @@ export default function Task({val = {}})
     const {taskItem = []} = useContext(taskContext)
 
     // Handle Task Input
-    const [taskData, setTaskData] = useState({
-        link: "",
-        comm: ""
-    });
+    const [taskData, setTaskData] = useState();
     var login_status = "false", stuId, taskId;
-
-    // const [formData, setFormData] = useState({
-    //     link: "",
-    //     comm: ""
-    // });
-
-    const [errors, setErrors] = useState({});
-    const [submitted, setSubmitted] = useState(false);
 
     var today = new Date();
     var dd = today.getDate();
@@ -62,54 +51,36 @@ export default function Task({val = {}})
         )
         let submit = document.getElementById("task_link").getAttribute("href");
         console.log("Submit", submit)
-        const { name, value } = e.target;
         if (e) {
             const taskCopy = {
               ...taskData,
-              [name]: value,
               studentId: stuId,
               submission_date: today,
               task_status: taskStatus,
               task_link: submit,
-              task_name: val
+              task_name: daytwo
             };
             taskCopy[e.target.id] = e.target.value;
             setTaskData(taskCopy);
           } 
+        
     }
-    
-    const validateForm = () => 
-    {
-        let isValid = true;
-        const newErrors = {};
-    
-        // Validate Form Fields
-        if (!taskData.link) {
-          newErrors.link = "Submission Link is required";
-          isValid = false;
-        }
-
-        if (!taskData.comm) {
-            newErrors.comm = "Comments is required";
-            isValid = false;
-        }
-    
-        setErrors(newErrors);
-        return isValid;
-    };
 
     // Task Sumbit Function call
-    var msg = "", id = 0, sub_link = "";
+    var msg = "", id, sub_link = "";
     taskItem.map(t => {
-        if(val === t.task_name)
+        if(daytwo === t.task_name)
         {
             id = 1;
-            sub_link = t.submission_link;
-            console.log(t.task_name.length, val.length, t.submission_link);
-            
+            sub_link = t.submission_link
+            console.log(t.task_name.length, daytwo.length, t.submission_link)
+        }
+        else{
+            id = 0;
         }
     })
     console.log(id, sub_link);
+
     function handleTaskSumbission(e)
     {
         // const taskLink = document.getElementById("task_link").value;
@@ -117,18 +88,13 @@ export default function Task({val = {}})
         // console.log(taskLink, comms);
         //e.preventDefault();
         taskItem.map((t, i) => {
-            if(val === t.task_name)
+            if(daytwo === t.task_name)
             {
                 taskId = t._id
                 id = 1;
                 console.log("TaskId", taskId)
             }
         })
-        if (validateForm()) {
-            // Form is valid, you can submit or process the data here
-            console.log("Form data:", formData);
-            setSubmitted(true); // Set a submitted flag
-          }
         if(id === 0)
         {
             fetch("http://localhost:5000/api/task/submit",{
@@ -172,13 +138,11 @@ export default function Task({val = {}})
             <div className="card ms-4 mt-2" style={{width: "50rem", padding: "0px", border: "2px solid #bfbfbf"}}>
                 <div className="card-header" id="headingOne">
                     <div className="row-lg-12 d-flex">
-                        <div className="col-lg-10 mt-2">
-                        <span style={{fontWeight: "600"}}>Day-1 Task Link :
-                        <a href="https://docs.google.com/document/d/1QznT1zM4mI6dG0TODx5Xjs1GquMoSHO3xZ1USDnVM-w/preview"
+                        <div className="col-lg-10">
+                        <span style={{fontWeight: "600"}}>Day-2 Task Link :  <a href="https://docs.google.com/document/d/1lkzy8u0rkW5v2jGvbJcJrmVVLjMqN_TmmsHkL41AoIc/preview"
                             id="task_link"  style={{fontFamily: "sans-serif", color: "#884dff", fontSize: "16px", fontWeight: "700"}}>
-                                 &nbsp;JavaScript - Day -1: Introduction to Browser & web
-                        </a>
-                        </span>
+                                &nbsp;JavaScript - Datatypes
+                            </a></span>
                         </div>
                         <div className="col-lg-2">
                             <button className="btn btn-primary" data-toggle="collapse" data-target="#task" 
@@ -197,7 +161,7 @@ export default function Task({val = {}})
                     {id === 1 ?
                         <div className="mb-3">
                             <label htmlFor="link" className="form-label" style={{fontWeight: "600", color: "#3333ff"}}>Front-end Source Code</label>
-                            <input type="text" className="form-control form-control-lg" id="submission_link" name="link"
+                            <input type="text" className="form-control form-control-lg" id="submission_link" 
                                 placeholder={sub_link} defaultValue={sub_link}
                                 style={{fontSize: "16px", width:"100%", height: "45px", borderRadius: "10px", fontWeight: "600"}}
                                     onChange={handleTaskInput}/>
@@ -205,18 +169,12 @@ export default function Task({val = {}})
                          : 
                          <div className="mb-3">
                              <label htmlFor="link" className="form-label" style={{fontWeight: "600", color: "#3333ff"}}>Front-end Source Code</label>
-                             <input type="text" className="form-control form-control-lg" id="submission_link" name="comm"
+                             <input type="text" className="form-control form-control-lg" id="submission_link" 
                                  placeholder="Enter Front-end Source Code Link" required 
                                  style={{fontSize: "16px", width:"100%", height: "45px", borderRadius: "10px"}}
                                      onChange={handleTaskInput}/>
                          </div>
                          }
-                         {errors.link && 
-                         <div className="error mb-2 ms-1 mt-2" style={{fontSize:"13px", color: "red"}}>
-                             <i className="bi bi-exclamation-circle"></i>&nbsp;&nbsp;
-                             {errors.link}
-                         </div>
-                         }                         
 
                         <div className="mb-3">
                             <label htmlFor="comment" className="form-label" style={{fontWeight: "600", color: "#3333ff"}}>Comments</label>
@@ -224,12 +182,6 @@ export default function Task({val = {}})
                                 required style={{fontSize: "16px", width:"100%", height: "45px", borderRadius: "10px"}}
                                 onChange={handleTaskInput}/>
                         </div>
-                        {errors.comm && 
-                        <div className="error mb-2 ms-1 mt-2" style={{fontSize:"13px", color: "red"}}>
-                            <i className="bi bi-exclamation-circle"></i>&nbsp;&nbsp;
-                            {errors.comm}
-                        </div>
-                        }
                         <div className="text-center">
                             <button type="button" className="btn btn-outline-primary" 
                                 style={{width: "15%", color: "black", fontWeight: "bold"}}

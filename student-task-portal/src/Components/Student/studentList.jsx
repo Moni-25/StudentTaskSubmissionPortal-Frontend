@@ -51,17 +51,17 @@ export default function StudentList()
           {mentorDetails.map(({mentorName, studentId}, i) => (
             <tbody>
             {data == mentorName ?
-                studentId.map((data, index) => (  //console.log(data.Description)) )                        
+                studentId.map(({studentFullName,email, phoneNumber, courseName}, index) => (  //console.log(data.Description)) )                        
                 // <div key={index}>
                   <tr className="text-center">
                     <td>{index + 1}</td>
-                    <td>{data.studentFullName}</td>
-                    <td>{data.email}</td>
-                    <td>{data.phoneNumber}</td>
-                    <td>{data.courseName}</td>
+                    <td>{studentFullName}</td>
+                    <td>{email}</td>
+                    <td>{phoneNumber}</td>
+                    <td>{courseName}</td>
                     <td>
-                    <Link to="/student_task" state={data.studentFullName}>
-                      <button type="button" class="btn btn-primary">
+                    <Link to="/student_task" state={{stu : studentFullName,mentor: data}}>
+                      <button type="button" class="btn btn-primary" style={{width: "80%", height: "35px"}}>
                           Task
                       </button>
                     </Link>

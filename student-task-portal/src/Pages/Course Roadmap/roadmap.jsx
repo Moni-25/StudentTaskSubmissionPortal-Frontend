@@ -22,7 +22,7 @@ export default function RoadMap({courseDayValue = {}, state = {}})
         {val === "1" ? navigate("/day1", {state:{fromHome: { data }}}): "hello"}
         console.log(val)
         // Day 2 Course 
-        {val === "2" ? navigate("/student"): "hello"}
+        {val === "2" ? navigate("/day2", {state:{fromHome: { data }}}): "hello"}
         // Day 3 Course 
         {val === "3" ? navigate("/student"): "hello"}
         // Day 4 Course 
