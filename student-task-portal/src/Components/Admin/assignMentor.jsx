@@ -128,7 +128,7 @@ export default function AssignMentor()
         .then((response) => response.json())
         .then((response) => {if(response.message === "Students Added Successfully!!!!"){
             alert("Mentor Assigned Successfully");
-            navigate("/admin_portal", {state:{ fromHome: { data }}})
+            navigate("/mentor_list", {state:{ fromHome: { data }}})
             window.location.reload();
         }})
         .catch((error) => console.log(error))
@@ -145,7 +145,15 @@ export default function AssignMentor()
                 <div className="collapse navbar-collapse" tabindex="-1" id="navbarToggler" aria-labelledby="offcanvasDarkNavbarLabel"> 
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <Link to="/assign_student" state={{ fromHome: { data }}} style={{textDecoration: "none"}}>
+                            <Link to="/mentor_list" state={{ fromHome: { data }}} style={{textDecoration: "none"}}>
+                                <a className="nav-link" href="#">
+                                <i className="bi bi-speedometer2"></i>
+                                        &nbsp;&nbsp;Mentor List
+                                </a>
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/assign_mentor" state={{ fromHome: { data }}} style={{textDecoration: "none"}}>
                                 <a className="nav-link active" href="#">
                                 <i className="bi bi-speedometer2"></i>
                                         &nbsp;&nbsp;Assign Mentor
@@ -153,7 +161,7 @@ export default function AssignMentor()
                             </Link>
                         </li>   
                         <li className="nav-item">
-                        <Link to="/dashboard" state={{ fromHome: { data }}} style={{textDecoration: "none"}}>
+                        <Link to="/mentor" state={{ fromHome: { data }}} style={{textDecoration: "none"}}>
                             <a className="nav-link" aria-current="page" href="#">
                             <i className="bi bi-person-video"></i>
                                     &nbsp;&nbsp;Create Mentor
@@ -195,7 +203,7 @@ export default function AssignMentor()
                             </select> */}
                             <div className="form-check m-3 col-lg-8">
                             {studentDetails.map(({studentFullName, courseName, mentorId}, i) => 
-                            (mentorId === undefined ?
+                            (mentorId.length === 0 ?
                             <div>
                                 <input
                                 className="form-check-input"
@@ -211,7 +219,7 @@ export default function AssignMentor()
                                     {studentFullName} - {courseName}
                                 </label>
                             </div>
-                            : ""))}
+                            : "No Student Found"))}
                             </div>
                         </div>
 

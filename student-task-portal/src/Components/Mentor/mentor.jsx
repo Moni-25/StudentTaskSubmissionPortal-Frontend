@@ -1,6 +1,8 @@
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import "./mentor.css"
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { studentContext } from "../../Context/getStudentContext";
+import { mentorContext } from "../../Context/getMentorContext";
 
 export default function Mentor()
 {
@@ -8,7 +10,7 @@ export default function Mentor()
     const { fromHome } = location.state;
     let data = fromHome.data;
     console.log(data)
-
+    const { mentorDetails = [] } = useContext(mentorContext);
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         mentor_name: "",
@@ -38,7 +40,7 @@ export default function Mentor()
             setFormData(formCopy);
           }      
     }
-
+    
     const validateForm = () => 
     {
         let isValid = true;
@@ -49,25 +51,43 @@ export default function Mentor()
           newErrors.mentor_name = "Mentorname is required";
           isValid = false;
         }
-
+        let user = document.getElementById("mentor_username").value;
+    console.log(user)
+        {mentorDetails.map(s => (formData.username === s.mentor_username ?  
+            formData.username = "already": ""))}
         if (!formData.username) {
             newErrors.username = "Username is required";
             isValid = false;
         }
-
+        if (formData.username === "already") {
+            newErrors.username = "Username already exit";
+            isValid = false;
+        }
+        
         if (!formData.password) {
             newErrors.password = "Password is required";
             isValid = false;
           }
-          
+          {mentorDetails.map(s => (formData.email === s.mentor_email ?  
+            formData.email = "already": ""))}  
         if (!formData.email) {
           newErrors.email = "Email is required";
           isValid = false;
         }
+        if (formData.email === "already") {
+            newErrors.email = "Email already exit";
+            isValid = false;
+        }
 
+        {mentorDetails.map(s => (formData.phoneNo === s.mentor_phoneNo ?  
+            formData.phoneNo = "already": ""))}  
         if (!formData.phoneNo) {
             newErrors.phoneNo = "Phone Number is required";
             isValid = false;
+          }
+          if (formData.phoneNo === "already") {
+              newErrors.phoneNo = "Phone Number Already Exit";
+              isValid = false;
           }
           
         if (!formData.course) {
@@ -92,6 +112,7 @@ export default function Mentor()
             console.log("Form data:", formData);
             setSubmitted(true); // Set a submitted flag
           }
+          if(formData.username !== "already" && formData.email !== "already" && formData.phoneNo !== "already"){
         fetch("http://localhost:5000/api/mentor/createMentor",{
             method: "POST",
             headers: {
@@ -103,9 +124,10 @@ export default function Mentor()
         .then((response) => {if(response.message === "Mentor Account Created Successfully!!!")
         {
             alert("Mentor Account Created Successfully!!!");
-            navigate("/admin_portal", {state:{ fromHome: { data }}})
+            navigate("/assign_mentor", {state:{ fromHome: { data }}})
+            window.location.reload();
         }})
-        .catch((error) => console.log(error));
+        .catch((error) => console.log(error));}
     }
     return (
         <>
@@ -119,7 +141,15 @@ export default function Mentor()
                 <div className="collapse navbar-collapse" tabindex="-1" id="navbarToggler" aria-labelledby="offcanvasDarkNavbarLabel"> 
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <Link to="/assign_student" state={{ fromHome: { data }}} style={{textDecoration: "none"}}>
+                            <Link to="/mentor_list" state={{ fromHome: { data }}} style={{textDecoration: "none"}}>
+                                <a className="nav-link" href="#">
+                                <i className="bi bi-speedometer2"></i>
+                                        &nbsp;&nbsp;Mentor List
+                                </a>
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/assign_mentor" state={{ fromHome: { data }}} style={{textDecoration: "none"}}>
                                 <a className="nav-link" href="#">
                                 <i className="bi bi-speedometer2"></i>
                                         &nbsp;&nbsp;Assign Mentor
@@ -187,7 +217,7 @@ export default function Mentor()
                             <div className="col-lg-4">
                                 <label htmlFor="mentor_password" className="form-label">Password</label>
                             </div>
-                            <input type="text" className="form-control" id="mentor_password" name="password" placeholder="Mentor Password" onChange={handleInputChange}/>
+                            <input type="password" className="form-control" id="mentor_password" name="password" placeholder="Mentor Password" onChange={handleInputChange}/>
                         </div>
 
                         {errors.password && 
@@ -225,7 +255,7 @@ export default function Mentor()
                         </div>
                         }
 
-                        <div className="row-lg-12 mt-2 d-flex">
+                        {/* <div className="row-lg-12 mt-2 d-flex">
                             <div className="col-lg-4">
                                 <label htmlFor="mentor_coursename" className="form-label">Course Name</label>
                             </div>
@@ -246,7 +276,7 @@ export default function Mentor()
                             <i className="bi bi-exclamation-circle"></i>&nbsp;&nbsp;
                             {errors.course}
                         </div>
-                        }
+                        } */}
 
                         <div className="row-lg-12 mt-2 d-flex">
                         <div className="col-lg-4">

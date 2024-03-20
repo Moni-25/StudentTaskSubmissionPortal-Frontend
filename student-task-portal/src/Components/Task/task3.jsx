@@ -3,12 +3,12 @@ import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { studentContext } from "../../Context/getStudentContext";
 import { taskContext } from "../../Context/getTaskDetailsContext";
 
-export default function TaskTwo({daytwo = {}})
+export default function TaskThree({val = {}})
 {
     const location = useLocation();
     const { fromHome } = location.state;
     let data = fromHome.data;
-    console.log("Day2-Task",data, daytwo);
+    console.log("Day3-Task",data, val);
 
     const navigate = useNavigate();
 
@@ -71,7 +71,7 @@ export default function TaskTwo({daytwo = {}})
               submission_date: today,
               task_status: taskStatus,
               task_link: submit,
-              task_name: daytwo
+              task_name: val
             };
             taskCopy[e.target.id] = e.target.value;
             setTaskData(taskCopy);
@@ -101,16 +101,13 @@ export default function TaskTwo({daytwo = {}})
     // Task Sumbit Function call
     var msg = "", id = 0, sub_link = "";
     taskItem.map(t => {
-        if(data === t.studentId.studentFullName)
-        {
-        if(daytwo === t.task_name)
+        if(val === t.task_name)
         {
             id = 1;
             sub_link = t.submission_link;
-            console.log(t.task_name.length, daytwo.length, t.submission_link);
+            console.log(t.task_name.length, val.length, t.submission_link);
             
         }
-    }
     })
     console.log(id, sub_link);
     function handleTaskSumbission(e)
@@ -119,6 +116,14 @@ export default function TaskTwo({daytwo = {}})
         // const comms = document.getElementById("comments").value;
         // console.log(taskLink, comms);
         //e.preventDefault();
+        // taskItem.map((t, i) => {
+        //     if(val === t.task_name)
+        //     {
+        //         taskId = t._id
+        //         id = 1;
+        //         console.log("TaskId", taskId)
+        //     }
+        // })
         {taskItem.map(({
             task_name,
             submission_date, 
@@ -134,11 +139,11 @@ export default function TaskTwo({daytwo = {}})
         {taskItem.map(t => {
             if(data === t.studentId.studentFullName)
             {
-            if(daytwo === t.task_name)
+            if(val === t.task_name)
             {
                 id = 1;
                 sub_link = t.submission_link;
-                console.log(t.task_name.length, daytwo.length, t.submission_link);
+                console.log(t.task_name.length, val.length, t.submission_link);
                 
             }
         }
@@ -163,12 +168,12 @@ export default function TaskTwo({daytwo = {}})
             {
                 console.log(msg)
                 alert(`Hi ${data}, You had submitted task successfully!!!`);
-                navigate("/day2", {state:{fromHome: { data }}});
+                navigate("/day3", {state:{fromHome: { data }}});
                 window.location.reload();
             }})
             .catch((error) => console.log(error))
         }
-        else if(id === 1){
+        else{
             fetch(`http://localhost:5000/api/task/update_stutask/${taskId}`,{
             headers: {
                 Accept: "application/json",
@@ -180,7 +185,7 @@ export default function TaskTwo({daytwo = {}})
         .then((response) => response.json())
         .then((response) => {if(response.message === "Task Submiited Successfully!!!!"){
             alert(`Hi ${data}, Your task has been resubmitted successfully!!!`);
-            navigate("/day2", {state:{fromHome: { data }}});
+            navigate("/day3", {state:{fromHome: { data }}});
             window.location.reload();
         }})
         .catch((error) => console.log(error))
@@ -193,10 +198,12 @@ export default function TaskTwo({daytwo = {}})
                 <div className="card-header" id="headingOne">
                     <div className="row-lg-12 d-flex">
                         <div className="col-lg-10 mt-2">
-                        <span style={{fontWeight: "600"}}>Day-2 Task Link :  <a href="https://docs.google.com/document/d/1lkzy8u0rkW5v2jGvbJcJrmVVLjMqN_TmmsHkL41AoIc/preview"
+                        <span style={{fontWeight: "600"}}>Day-3 Task Link :
+                        <a href="https://docs.google.com/document/d/1cNDeT0CKJwqXYDeSIlmJVhx_t4AFvR_0Ypa1cp2rhJk/edit?usp=sharing"
                             id="task_link" target="_blank" style={{fontFamily: "sans-serif", color: "#884dff", fontSize: "16px", fontWeight: "700"}}>
-                                &nbsp;JavaScript - Datatypes
-                            </a></span>
+                                 &nbsp;JavaScript - Day -3: JS array & objects
+                        </a>
+                        </span>
                         </div>
                         <div className="col-lg-2">
                             <button className="btn btn-primary" data-toggle="collapse" data-target="#task" 

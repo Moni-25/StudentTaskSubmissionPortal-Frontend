@@ -19,7 +19,7 @@ export default function StuList()
                 <div className="collapse navbar-collapse" tabindex="-1" id="navbarToggler" aria-labelledby="offcanvasDarkNavbarLabel"> 
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <Link to="/assign_mentor" state={{ fromHome: { data }}} style={{textDecoration: "none"}}>
+                            <Link to="/mentor_profile" state={{ fromHome: { data }}} style={{textDecoration: "none"}}>
                                 <a className="nav-link" href="#">
                                 <i className="bi bi-person-circle"></i>
                                         &nbsp;&nbsp;Profile

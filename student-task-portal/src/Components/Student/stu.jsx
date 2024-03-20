@@ -77,7 +77,7 @@ export default function Stu()
             navigate("/student_portal", {state: data});
         }
         else{
-            console.log("Username or Password Incorrect");
+            alert("Username or Password Incorrect");
         }
         //console.log(studentLogin)
     }
@@ -122,16 +122,16 @@ export default function Stu()
                             {errors.studentPassword}
                     </div>}
 
-                    <div className="mt-1 mb-2 text-end">
+                    {/* <div className="mt-1 mb-2 text-end">
                         <a href="">Forgot Password?</a>
-                    </div>
+                    </div> */}
 
                     <div className="mt-3 text-center">
                         <button type="button" className="btn btn-primary" onClick={handleButton}>Login</button>
                     </div>
 
                     <div className="mt-3 text-center">
-                        <Link to="/sign_up">
+                        <Link to="/sign_up" style={{textDecoration: "none"}}>
                             <a>New User? Sign Up Here.....</a>
                         </Link>
                     </div>

@@ -1,14 +1,17 @@
+import { useContext } from "react";
 import { useLocation, Link } from "react-router-dom";
+import { mentorContext } from "../../Context/getMentorContext";
 
-export default function AdminPortal()
+export default function MentorList()
 {
     const location = useLocation();
     const { fromHome } = location.state;
     let data = fromHome.data;
     console.log(data)
+    const {mentorDetails = []} = useContext(mentorContext);
     return(
         <>
-            <nav className="navbar navbar-expand-lg bg-primary">
+        <nav className="navbar navbar-expand-lg bg-primary">
                 <div className="container-fluid">
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" 
                         aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation"
@@ -46,6 +49,42 @@ export default function AdminPortal()
                 </div>
                 </div>
             </nav>
+            <div className="container" style={{
+                width: "45rem", 
+                borderColor: "#bf80ff", 
+                borderRadius: "15px",
+                position: "absolute",
+                top: "20%",
+                left: "50%",
+                transform: "translate(-50%, 0%)"
+            }}>
+                 <table className="table table-borderless table-hover">
+            <thead>
+              <tr className="table-danger text-center">
+                <th>Sl.No</th>
+                <th>Mentor Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Address</th>
+              </tr>
+            </thead>
+            {mentorDetails.map(({address, mentorName,mentor_email,mentor_phoneNo, studentId}, i) => (
+            <tbody>
+                  <tr className="text-center">
+                    <td>{i + 1}</td>
+                    <td>{mentorName}</td>
+                    <td>{mentor_email}</td>
+                    <td>{mentor_phoneNo}</td>
+                    {studentId.length !== 0 ? 
+                    studentId.map(({studentFullName,email, phoneNumber, courseName}, index) => ( 
+                    <td>{courseName}</td>
+                    ))
+                    : ""}
+                  </tr>           
+            </tbody>
+            ))}
+            </table>
+            </div>
         </>
     )
 }

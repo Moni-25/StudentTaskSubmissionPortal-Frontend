@@ -74,7 +74,7 @@ export default function Admin()
             navigate("/admin_portal", {state:{ fromHome: { data }}});
         }
         else{
-            console.log("Username or Password Incorrect");
+            alert("Username or Password Incorrect");
         }
         //console.log(studentLogin)
     }

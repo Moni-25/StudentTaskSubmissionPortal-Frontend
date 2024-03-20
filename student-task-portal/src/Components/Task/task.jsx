@@ -101,6 +101,8 @@ export default function Task({val = {}})
     // Task Sumbit Function call
     var msg = "", id = 0, sub_link = "";
     taskItem.map(t => {
+        if(data === t.studentId.studentFullName)
+        {
         if(val === t.task_name)
         {
             id = 1;
@@ -108,6 +110,7 @@ export default function Task({val = {}})
             console.log(t.task_name.length, val.length, t.submission_link);
             
         }
+    }
     })
     console.log(id, sub_link);
     function handleTaskSumbission(e)
@@ -116,12 +119,43 @@ export default function Task({val = {}})
         // const comms = document.getElementById("comments").value;
         // console.log(taskLink, comms);
         //e.preventDefault();
+        {taskItem.map(({
+            task_name,
+            submission_date, 
+            submission_link,
+            task_link, 
+            comments, 
+            mentor_comment,
+            task_mark,
+            _id,
+            studentId}, i) => (data === studentId.studentFullName ? taskId = _id : id = 0)
+        )}
+        console.log(taskId, "Task Id", id)
+        {studentDetails.map(s => {
+            taskItem.map(t => {
+            for(let j = 0; j < (s.taskName).length; j++){
+            if(data === t.studentId.studentFullName && val !== t.task_name)
+            {
+                id = 0;
+            }
+            if(data === t.studentId.studentFullName && val === t.task_name)
+            {
+                if(data === s.studentFullName && val === s.taskName[j])
+                {
+                id = 1;
+                sub_link = s.submission_link;
+                console.log(s.courseName.length, val.length, s.taskName[j]);  
+                }
+            }
+        }})
+        })
+        console.log(id, sub_link);}
         taskItem.map((t, i) => {
             if(val === t.task_name)
             {
-                taskId = t._id
-                id = 1;
-                console.log("TaskId", taskId)
+                //taskId = t._id
+                //id = 1;
+                //console.log("TaskId", taskId)
             }
         })
         if (validateForm()) {
@@ -143,7 +177,7 @@ export default function Task({val = {}})
             {
                 console.log(msg)
                 alert(`Hi ${data}, You had submitted task successfully!!!`);
-                navigate("/class", {state:{fromHome: { data }}});
+                navigate("/day1", {state:{fromHome: { data }}});
                 window.location.reload();
             }})
             .catch((error) => console.log(error))
@@ -160,7 +194,7 @@ export default function Task({val = {}})
         .then((response) => response.json())
         .then((response) => {if(response.message === "Task Submiited Successfully!!!!"){
             alert(`Hi ${data}, Your task has been resubmitted successfully!!!`);
-            navigate("/class", {state:{fromHome: { data }}});
+            navigate("/day1", {state:{fromHome: { data }}});
             window.location.reload();
         }})
         .catch((error) => console.log(error))
@@ -175,7 +209,7 @@ export default function Task({val = {}})
                         <div className="col-lg-10 mt-2">
                         <span style={{fontWeight: "600"}}>Day-1 Task Link :
                         <a href="https://docs.google.com/document/d/1QznT1zM4mI6dG0TODx5Xjs1GquMoSHO3xZ1USDnVM-w/preview"
-                            id="task_link"  style={{fontFamily: "sans-serif", color: "#884dff", fontSize: "16px", fontWeight: "700"}}>
+                            id="task_link" target="_blank" style={{fontFamily: "sans-serif", color: "#884dff", fontSize: "16px", fontWeight: "700"}}>
                                  &nbsp;JavaScript - Day -1: Introduction to Browser & web
                         </a>
                         </span>

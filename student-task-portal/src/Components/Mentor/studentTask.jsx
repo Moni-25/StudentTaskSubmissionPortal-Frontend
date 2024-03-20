@@ -9,6 +9,7 @@ export default function StudentTaskDetails()
     const data1  = location.state;
     console.log(data1.stu, data1.mentor)
     const data = data1.mentor;
+    const student = data1.stu;
     const navigate = useNavigate();
     const { studentDetails = [] } = useContext(studentContext);
     const { taskItem = [] } = useContext(taskContext);
@@ -17,9 +18,9 @@ export default function StudentTaskDetails()
     let mark = "", comm = "";
     function handleTaskInput(e)
     {
-        mark = document.getElementById("task_mark").value;
-        comm = document.getElementById("mentor_comment").value;
-        console.log(e.target.value)
+        // mark = document.getElementById("task_mark").value;
+        // comm = document.getElementById("mentor_comment").value;
+        console.log(e.target.value, e.target.id)
         if (e) {
             const formCopy = {
               ...formData,
@@ -27,7 +28,7 @@ export default function StudentTaskDetails()
             formCopy[e.target.id] = e.target.value;
             setFormData(formCopy);
           }
-          console.log("hi",mark, comm)
+          //console.log("hi",mark, comm)
     }
     console.log("hi",mark, comm)
     var no_record = "false";
@@ -43,9 +44,9 @@ export default function StudentTaskDetails()
         console.log(e.target.value, e.target.id)
         let taskId = 0;
         let taskname = document.getElementById("taskName").value;
-        console.log(taskname);
+        console.log(taskname, "task");
         taskItem.map((taskVal,i) => {
-            if(taskname === taskVal.task_name)
+            if(e.target.value === taskVal.task_name)
             {
                 taskId = taskVal._id;            
             }
@@ -160,6 +161,16 @@ export default function StudentTaskDetails()
                         </div>
                     </div>
                     : ""))}
+
+                    {no_record === "true" ? <div className="text-center mb-4 pt-2" style={{
+                        border: "2px solid black", 
+                        borderRadius: "12px",
+                        width: "80%",
+                        height: "50px",
+                        marginLeft: "9%"}}>
+                            <h5>No Task Submitted Yet</h5>
+                        </div> : ""}
+
                     {taskItem.map(({
                         task_name,
                         submission_date, 
@@ -182,7 +193,6 @@ export default function StudentTaskDetails()
                             <div className="col-lg-8">
                                 <label htmlFor="" className="form-label" style={{fontSize:"16px", fontWeight: "700"}}>
                                     {task_name}
-                                    <input type="text" className="form-control" id="taskName" value={task_name} required hidden readOnly/>
                                 </label>
                             </div>
                             </div>
@@ -248,45 +258,18 @@ export default function StudentTaskDetails()
                                 </label>
                             </div>
                             </div>
-                            
-                            {task_mark === undefined ?
-                            <div className="row-lg-12 ms-1 mt-1 d-flex">
-                            <div className="col-lg-3">
-                                <label htmlFor="" className="form-label" style={{fontSize:"16px"}}>
-                                    Task Mark <span style={{color:"red", fontSize: "20px"}}>*</span>
-                                </label>
-                                <p style={{color: "red", fontSize: "13px"}}>Note: Evaluate task and give mark out of 10</p>
-                            </div>
-                            <div className="col-lg-1">
-                                <span style={{fontWeight:"700"}}>:</span>
-                            </div>
-                            <div className="col-lg-8">
-                            <input type="text" className="form-control" id="task_mark" placeholder="Leave Your Mark out of 10" 
-                                    required style={{fontSize: "16px", width:"100%", height: "50px", borderRadius: "10px"}}
-                                    onChange={handleTaskInput}/>
-                            </div>
-                            </div>
-                            :
-                            <div className="row-lg-12 ms-1 mt-1 d-flex">
-                            <div className="col-lg-3">
-                                <label htmlFor="" className="form-label" style={{fontSize:"16px"}}>
-                                    Task Mark <span style={{color:"red", fontSize: "20px"}}>*</span>
-                                </label>
-                                <p style={{color: "red", fontSize: "13px"}}>Note: Evaluate task and give mark out of 10</p>
-                            </div>
-                            <div className="col-lg-1">
-                                <span style={{fontWeight:"700"}}>:</span>
-                            </div>
-                            <div className="col-lg-8">
-                            <input type="text" className="form-control" id="task_mark" value={task_mark} 
-                                    required style={{fontSize: "16px", width:"100%", height: "50px", borderRadius: "10px"}}
-                                    disabled readOnly/>
-                            </div>
-                            </div>
-                            }
 
-                            {mentor_comment === undefined ?
-                            <div className="row-lg-12 ms-1 mt-1 d-flex">
+                            <div className="row-lg-12 ms-1 mt-1 d-flex justify-content-end">
+                            <Link to="/mark" state={{stu : student, mentor: data, task: task_name}}>
+                                <button type="button" class="btn btn-primary" style={{width: "100%", height: "35px"}}>
+                                    Task Evaluate
+                                </button>
+                            </Link>
+                            </div>
+
+                            </div>
+                        : ""))}
+                        {/* <div className="row-lg-12 ms-1 mt-1 d-flex">
                             <div className="col-lg-3">
                                 <label htmlFor="" className="form-label" style={{fontSize:"16px"}}>
                                     Comments <span style={{color:"red", fontSize: "20px"}}>*</span>
@@ -300,51 +283,17 @@ export default function StudentTaskDetails()
                                     required style={{fontSize: "16px", width:"100%", height: "60px", borderRadius: "10px"}}
                                     onChange={handleTaskInput}/>
                             </div>
-                            </div>
-                            :
-                            <div className="row-lg-12 ms-1 mt-1 d-flex">
-                            <div className="col-lg-3">
-                                <label htmlFor="" className="form-label" style={{fontSize:"16px"}}>
-                                    Comments <span style={{color:"red", fontSize: "20px"}}>*</span>
-                                </label>
-                            </div>
-                            <div className="col-lg-1">
-                                <span style={{fontWeight:"700"}}>:</span>
-                            </div>
-                            <div className="col-lg-8">
-                            <input type="text" className="form-control" id="mentor_comment" value={mentor_comment}
-                                    required style={{fontSize: "16px", width:"100%", height: "60px", borderRadius: "10px"}}
-                                    disabled readOnly/>
-                            </div>
-                            </div>
-                            }
+                        </div>
 
-                            {task_mark === undefined && mentor_comment === undefined ?
-                            <div className="text-center mt-3">
+                        <div className="text-center mt-3">
                                 <button type="button" className="btn btn-outline-primary" 
                                     style={{width: "15%", color: "black", fontWeight: "bold"}}
                                         onClick={handleMentor}>
                                     Submit
                                 </button>
-                            </div>
-                            :
-                            <div className="text-center mt-3">
-                            <button type="button" className="btn btn-outline-primary" 
-                                style={{width: "15%", color: "black", fontWeight: "bold"}}
-                                    hidden>
-                                Submit
-                            </button>
-                        </div>
-                        }
-                            
-                        </div>
-                    : ""))}
-                {no_record === "true" ? 
-                        <div className="card-body ms-4 mb-3" style={{width: "42rem", border: "2px solid #aaff80", borderRadius: "12px"}}>
-                            <h6 style={{fontWeight: "700"}}>No Task Submitted</h6>
-                        </div> : ""} 
-                </div>  
+                        </div> */}
                 </div>         
+                </div>
             </div>
         </>
      )

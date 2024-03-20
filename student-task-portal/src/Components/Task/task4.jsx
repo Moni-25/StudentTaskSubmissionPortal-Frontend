@@ -3,12 +3,12 @@ import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { studentContext } from "../../Context/getStudentContext";
 import { taskContext } from "../../Context/getTaskDetailsContext";
 
-export default function TaskTwo({daytwo = {}})
+export default function TaskFour({val = {}})
 {
     const location = useLocation();
     const { fromHome } = location.state;
     let data = fromHome.data;
-    console.log("Day2-Task",data, daytwo);
+    //console.log("Day4-Task",data, val);
 
     const navigate = useNavigate();
 
@@ -50,18 +50,18 @@ export default function TaskTwo({daytwo = {}})
     function handleTaskInput(e)
     {
         //e.preventDefault();
-        console.log(e.target.id, e.target.value);
-        console.log(taskItem.length)
+        //console.log(e.target.id, e.target.value);
+        //console.log(taskItem.length)
         studentDetails.map((task, index) => {
             if(data === task.studentFullName){
                 login_status = "true";
                 stuId = task._id;
-                console.log(task.studentFullName, login_status, stuId)
+                //console.log(task.studentFullName, login_status, stuId)
             }
         }
         )
         let submit = document.getElementById("task_link").getAttribute("href");
-        console.log("Submit", submit)
+        //console.log("Submit", submit)
         const { name, value } = e.target;
         if (e) {
             const taskCopy = {
@@ -71,7 +71,7 @@ export default function TaskTwo({daytwo = {}})
               submission_date: today,
               task_status: taskStatus,
               task_link: submit,
-              task_name: daytwo
+              task_name: val
             };
             taskCopy[e.target.id] = e.target.value;
             setTaskData(taskCopy);
@@ -101,24 +101,17 @@ export default function TaskTwo({daytwo = {}})
     // Task Sumbit Function call
     var msg = "", id = 0, sub_link = "";
     taskItem.map(t => {
-        if(data === t.studentId.studentFullName)
-        {
-        if(daytwo === t.task_name)
+        if(val === t.task_name)
         {
             id = 1;
             sub_link = t.submission_link;
-            console.log(t.task_name.length, daytwo.length, t.submission_link);
+            //console.log(t.task_name.length, val.length, t.submission_link);
             
         }
-    }
     })
-    console.log(id, sub_link);
+    //console.log(id, sub_link);
     function handleTaskSumbission(e)
     {
-        // const taskLink = document.getElementById("task_link").value;
-        // const comms = document.getElementById("comments").value;
-        // console.log(taskLink, comms);
-        //e.preventDefault();
         {taskItem.map(({
             task_name,
             submission_date, 
@@ -134,11 +127,11 @@ export default function TaskTwo({daytwo = {}})
         {taskItem.map(t => {
             if(data === t.studentId.studentFullName)
             {
-            if(daytwo === t.task_name)
+            if(val === t.task_name)
             {
                 id = 1;
                 sub_link = t.submission_link;
-                console.log(t.task_name.length, daytwo.length, t.submission_link);
+                console.log(t.task_name.length, val.length, t.submission_link);
                 
             }
         }
@@ -146,7 +139,7 @@ export default function TaskTwo({daytwo = {}})
         console.log(id, sub_link);}
         if (validateForm()) {
             // Form is valid, you can submit or process the data here
-            console.log("Form data:", formData);
+            console.log("Form data:", taskData);
             setSubmitted(true); // Set a submitted flag
           }
         if(id === 0)
@@ -161,14 +154,14 @@ export default function TaskTwo({daytwo = {}})
             .then((response) => response.json())
             .then((response) => {if(response.message === "Task Submitted Successfully!!!")
             {
-                console.log(msg)
+                //console.log(msg)
                 alert(`Hi ${data}, You had submitted task successfully!!!`);
-                navigate("/day2", {state:{fromHome: { data }}});
+                navigate("/day4", {state:{fromHome: { data }}});
                 window.location.reload();
             }})
             .catch((error) => console.log(error))
         }
-        else if(id === 1){
+        else{
             fetch(`http://localhost:5000/api/task/update_stutask/${taskId}`,{
             headers: {
                 Accept: "application/json",
@@ -180,7 +173,7 @@ export default function TaskTwo({daytwo = {}})
         .then((response) => response.json())
         .then((response) => {if(response.message === "Task Submiited Successfully!!!!"){
             alert(`Hi ${data}, Your task has been resubmitted successfully!!!`);
-            navigate("/day2", {state:{fromHome: { data }}});
+            navigate("/day4", {state:{fromHome: { data }}});
             window.location.reload();
         }})
         .catch((error) => console.log(error))
@@ -193,10 +186,12 @@ export default function TaskTwo({daytwo = {}})
                 <div className="card-header" id="headingOne">
                     <div className="row-lg-12 d-flex">
                         <div className="col-lg-10 mt-2">
-                        <span style={{fontWeight: "600"}}>Day-2 Task Link :  <a href="https://docs.google.com/document/d/1lkzy8u0rkW5v2jGvbJcJrmVVLjMqN_TmmsHkL41AoIc/preview"
+                        <span style={{fontWeight: "600"}}>Day-4 Task Link :
+                        <a href="https://docs.google.com/document/d/1TPk3wqxDFi64WV-6hJOkYEzBaAYxNvZ4T9hRJGgvFjw/edit?usp=sharing"
                             id="task_link" target="_blank" style={{fontFamily: "sans-serif", color: "#884dff", fontSize: "16px", fontWeight: "700"}}>
-                                &nbsp;JavaScript - Datatypes
-                            </a></span>
+                                 &nbsp;JavaScript - Day -4: Functions
+                        </a>
+                        </span>
                         </div>
                         <div className="col-lg-2">
                             <button className="btn btn-primary" data-toggle="collapse" data-target="#task" 

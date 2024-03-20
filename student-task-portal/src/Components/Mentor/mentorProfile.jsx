@@ -1,15 +1,15 @@
-import { useCallback, useContext } from "react";
+import { useContext } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { mentorContext } from "../../Context/getMentorContext";
 
-export default function MentorPortal()
+export default function MentotProfile()
 {
     const location = useLocation();
     const { fromHome } = location.state;
     let data = fromHome.data;
     console.log(data)
-    const {mentorDetails=[]} = useContext(mentorContext)
-    return(
+    const {mentorDetails = []} = useContext(mentorContext);
+    return (
         <>
             <nav className="navbar navbar-expand-lg bg-primary">
                 <div className="container-fluid">
@@ -41,7 +41,6 @@ export default function MentorPortal()
                 </div>
                 </div>
             </nav>
-
             <div className="container" style={{
                 width: "45rem", 
                 border: "2px solid #bf80ff", 

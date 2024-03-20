@@ -64,7 +64,7 @@ export default function TaskSubmit()
             </nav>
 
             <div className="container mt-5">
-                <TaskDetails/>
+                <TaskDetails state={{fromHome:data}}/>
             </div>
         </>
     )

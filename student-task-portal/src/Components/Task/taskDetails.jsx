@@ -1,8 +1,13 @@
 import { useContext } from "react";
 import { taskContext } from "../../Context/getTaskDetailsContext";
+import { useLocation } from "react-router-dom";
 
-export default function TaskDetails()
+export default function TaskDetails({state = {}})
 {
+    const location = useLocation();
+    const { fromHome } = location.state;
+    let data = fromHome.data;
+    console.log(data)
     const {taskItem = []} = useContext(taskContext);
     console.log(taskItem)
     let keys;
@@ -14,7 +19,7 @@ export default function TaskDetails()
 
     return(
         <>
-        {taskItem.map((alltask, index) => 
+        {taskItem.map((alltask, index) => (data === alltask.studentId.stu_username ?
             <div className="card mt-2 mb-2" style={{margin: "auto", width: "60%", border: "2px solid #73AD21", padding: "10px"}}>
                 {/* <div className="card-header">
                     Featured
@@ -28,7 +33,7 @@ export default function TaskDetails()
                             Task Name:&nbsp;&nbsp;
                         </label> */}
                         <span style={{fontWeight: "700", color: " #7575a3", fontSize: "18px"}}>
-                            JavaScript - Day -1: Introduction to Browser & web<br></br>
+                            {alltask.task_name}<br></br>
                         </span>
                         <label htmlFor="" style={{fontWeight: "600", marginTop: "5px", color: " #ff8080"}}>
                             Task Link:&nbsp;&nbsp;
@@ -54,7 +59,7 @@ export default function TaskDetails()
                     </div>
                 </div>
             </div>
-        )}
+        : "" ))}
         </>
     )
 }
