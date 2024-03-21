@@ -56,7 +56,7 @@ export default function HtmlTaskFour({val = {}})
             if(data === task.stu_username){
                 login_status = "true";
                 stuId = task._id;
-                //console.log(task.studentFullName, login_status, stuId)
+                //console.log(task.stu_username, login_status, stuId)
             }
         }
         )
@@ -101,29 +101,49 @@ export default function HtmlTaskFour({val = {}})
     // Task Sumbit Function call
     var msg = "", id = 0, sub_link = "";
     taskItem.map(t => {
+        if(data === t.studentId.stu_username)
+        {
         if(val === t.task_name)
         {
             id = 1;
             sub_link = t.submission_link;
-            //console.log(t.task_name.length, val.length, t.submission_link);
+            console.log(t.task_name.length, val.length, t.submission_link);
             
         }
+    }
     })
-    //console.log(id, sub_link);
+    console.log(id, sub_link);
     function handleTaskSumbission(e)
     {
-        // const taskLink = document.getElementById("task_link").value;
-        // const comms = document.getElementById("comments").value;
-        // console.log(taskLink, comms);
-        //e.preventDefault();
-        taskItem.map((t, i) => {
-            if(val === t.task_name)
+        {studentDetails.map(s => {
+            taskItem.map(t => {
+            for(let j = 0; j < (s.taskName).length; j++){
+                console.log(s.taskName[j])
+            if(data === s.stu_username)
             {
-                taskId = t._id
-                id = 1;
-                //console.log("TaskId", taskId)
+                if(val !== t.task_name)
+                {
+                    id = 0;
+                    console.log(id, "ID")
+                    break;
+                }
             }
+           
+            if(data === t.studentId.stu_username && val === s.taskName[j])
+            {
+                if(val === t.task_name)
+                {
+                    id = 1;
+                    taskId = t._id;
+                    sub_link = t.submission_link;
+                    console.log(s.courseName.length, val.length, s.taskName[j]);  
+                }
+            }
+            
+        }})
         })
+        console.log(id, sub_link);
+        console.log(taskId, "Task Id", id);}
         if (validateForm()) {
             // Form is valid, you can submit or process the data here
             console.log("Form data:", taskData);

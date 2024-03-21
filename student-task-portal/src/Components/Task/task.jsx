@@ -53,10 +53,10 @@ export default function Task({val = {}})
         console.log(e.target.id, e.target.value);
         console.log(taskItem.length)
         studentDetails.map((task, index) => {
-            if(data === task.studentFullName){
+            if(data === task.stu_username){
                 login_status = "true";
                 stuId = task._id;
-                console.log(task.studentFullName, login_status, stuId)
+                console.log(task.stu_username, login_status, stuId)
             }
         }
         )
@@ -101,7 +101,7 @@ export default function Task({val = {}})
     // Task Sumbit Function call
     var msg = "", id = 0, sub_link = "";
     taskItem.map(t => {
-        if(data === t.studentId.studentFullName)
+        if(data === t.studentId.stu_username)
         {
         if(val === t.task_name)
         {
@@ -115,49 +115,31 @@ export default function Task({val = {}})
     console.log(id, sub_link);
     function handleTaskSumbission(e)
     {
-        // const taskLink = document.getElementById("task_link").value;
-        // const comms = document.getElementById("comments").value;
-        // console.log(taskLink, comms);
-        //e.preventDefault();
-        {taskItem.map(({
-            task_name,
-            submission_date, 
-            submission_link,
-            task_link, 
-            comments, 
-            mentor_comment,
-            task_mark,
-            _id,
-            studentId}, i) => (data === studentId.studentFullName ? taskId = _id : id = 0)
-        )}
-        console.log(taskId, "Task Id", id)
         {studentDetails.map(s => {
             taskItem.map(t => {
             for(let j = 0; j < (s.taskName).length; j++){
-            if(data === t.studentId.studentFullName && val !== t.task_name)
+                console.log(s.taskName[j])
+            if(data === s.stu_username && val !== s.taskName[j])
             {
                 id = 0;
+                console.log(id, "ID")
             }
-            if(data === t.studentId.studentFullName && val === t.task_name)
+           
+            if(data === t.studentId.stu_username && val === s.taskName[j])
             {
-                if(data === s.studentFullName && val === s.taskName[j])
+                if(val === t.task_name)
                 {
-                id = 1;
-                sub_link = s.submission_link;
-                console.log(s.courseName.length, val.length, s.taskName[j]);  
+                    id = 1;
+                    taskId = t._id;
+                    sub_link = t.submission_link;
+                    console.log(s.courseName.length, val.length, s.taskName[j]);  
                 }
             }
+            
         }})
         })
-        console.log(id, sub_link);}
-        taskItem.map((t, i) => {
-            if(val === t.task_name)
-            {
-                //taskId = t._id
-                //id = 1;
-                //console.log("TaskId", taskId)
-            }
-        })
+        console.log(id, sub_link);
+        console.log(taskId, "Task Id", id);}
         if (validateForm()) {
             // Form is valid, you can submit or process the data here
             console.log("Form data:", formData);

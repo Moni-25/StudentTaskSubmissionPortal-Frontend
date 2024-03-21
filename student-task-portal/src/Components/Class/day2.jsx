@@ -27,14 +27,6 @@ export default function ClassTwo()
                                     &nbsp;&nbsp;Class
                             </a>
                         </Link>
-                        </li>
-                        <li className="nav-item">
-                        <Link to="/dashboard" state={{ fromHome: { data }}} style={{textDecoration: "none"}}>
-                            <a className="nav-link" href="#">
-                                <i className="bi bi-person-video"></i>
-                                    &nbsp;&nbsp;Dashboard
-                            </a>
-                        </Link>
                         </li>      
                         <li className="nav-item">
                         <Link to="/task_submit" state={{ fromHome: { data }}} style={{textDecoration: "none"}}>
@@ -43,12 +35,6 @@ export default function ClassTwo()
                                     &nbsp;&nbsp;Tasks
                             </a>
                         </Link>    
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">
-                                <i className="bi bi-patch-question-fill"></i>
-                                    &nbsp;&nbsp;Queries
-                            </a>
                         </li>
                     </ul>
                     <a className="navbar-brand" href="#">{data}</a>
@@ -103,7 +89,7 @@ export default function ClassTwo()
                 <div className="col-lg-8">
                     <div className="container">
                     <h5 style={{fontWeight: "600", color: "#3333ff"}} className="ms-4 mt-3">Task Submission</h5>
-                    <TaskTwo state={{ fromHome: { data }}} daytwo={name}/>
+                    <TaskTwo state={{ fromHome: { data }}} val={name}/>
                     </div>
                 </div>
             </div>

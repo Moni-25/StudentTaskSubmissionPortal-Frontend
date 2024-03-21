@@ -29,26 +29,12 @@ export default function HtmlClassThree()
                         </Link>
                         </li>
                         <li className="nav-item">
-                        <Link to="/dashboard" state={{ fromHome: { data }}} style={{textDecoration: "none"}}>
-                            <a className="nav-link" href="#">
-                                <i className="bi bi-person-video"></i>
-                                    &nbsp;&nbsp;Dashboard
-                            </a>
-                        </Link>
-                        </li>      
-                        <li className="nav-item">
                         <Link to="/task_submit" state={{ fromHome: { data }}} style={{textDecoration: "none"}}>
                             <a className="nav-link" href="#">
                                 <i className="bi bi-list-task"></i>
                                     &nbsp;&nbsp;Tasks
                             </a>
                         </Link>    
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">
-                                <i className="bi bi-patch-question-fill"></i>
-                                    &nbsp;&nbsp;Queries
-                            </a>
                         </li>
                     </ul>
                     <a className="navbar-brand" href="#">{data}</a>

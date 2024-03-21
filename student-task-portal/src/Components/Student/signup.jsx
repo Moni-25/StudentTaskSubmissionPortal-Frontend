@@ -85,16 +85,30 @@ export default function SignUp()
         setErrors(newErrors);
         return isValid;
     };
-    
+    let taskname = [], htmlTask =[];
     function handleInputChange(e)
     {
         //e.preventDefault();
         //console.log(e.target.value, e.target.id)      
         const { name, value } = e.target;
-
+        if(e.target.value === "Javascript")
+        {
+            taskname = ["JavaScript - Day -1: Introduction to Browser & web", 
+            "JavaScript - Day -2: Datatypes", "JavaScript - Day -3: JS array & objects",
+    "JavaScript - Day -4: Functions", "JavaScript - Day -6: OOP in JS", "JavaScript - Day -7: Array methods"]
+        }
+        else if(e.target.value === "Html & CSS")
+        {
+            taskname =["HTML- Day-1: HTML",
+                        "HTML & CSS- Day -2: HTML & CSS",
+                        "HTML & CSS- Day-3: HTML & CSS",
+                        "HTML & CSS- Day-4: HTML & CSS",
+                        "Day -5: HTML & CSS"]
+        }
         if (e) {
             const formCopy = {
               ...formData,
+              taskName: taskname,
               [name]: value
             };
             formCopy[e.target.id] = e.target.value;
@@ -125,6 +139,7 @@ export default function SignUp()
             //console.log(msg)
             alert("Student Account Created Successfully");
             navigate("/");
+            window.location.reload();
         }})
         .catch((error) => console.log(error));
     }
@@ -225,7 +240,6 @@ export default function SignUp()
                                 <option selected>Choose Your Course</option>
                                 <option value="Javascript">Javascript</option>
                                 <option value="Html & CSS">Html & CSS</option>
-                                <option value="MySQL">MySQL</option>
                             </select>
                         </div>
 

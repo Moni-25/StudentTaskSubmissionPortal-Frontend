@@ -3,12 +3,12 @@ import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { studentContext } from "../../Context/getStudentContext";
 import { taskContext } from "../../Context/getTaskDetailsContext";
 
-export default function TaskTwo({daytwo = {}})
+export default function Task({val = {}})
 {
     const location = useLocation();
     const { fromHome } = location.state;
     let data = fromHome.data;
-    console.log("Day2-Task",data, daytwo);
+    console.log("Day2-Task",data, val);
 
     const navigate = useNavigate();
 
@@ -53,10 +53,10 @@ export default function TaskTwo({daytwo = {}})
         console.log(e.target.id, e.target.value);
         console.log(taskItem.length)
         studentDetails.map((task, index) => {
-            if(data === task.studentFullName){
+            if(data === task.stu_username){
                 login_status = "true";
                 stuId = task._id;
-                console.log(task.studentFullName, login_status, stuId)
+                console.log(task.stu_username, login_status, stuId)
             }
         }
         )
@@ -71,7 +71,7 @@ export default function TaskTwo({daytwo = {}})
               submission_date: today,
               task_status: taskStatus,
               task_link: submit,
-              task_name: daytwo
+              task_name: val
             };
             taskCopy[e.target.id] = e.target.value;
             setTaskData(taskCopy);
@@ -101,13 +101,13 @@ export default function TaskTwo({daytwo = {}})
     // Task Sumbit Function call
     var msg = "", id = 0, sub_link = "";
     taskItem.map(t => {
-        if(data === t.studentId.studentFullName)
+        if(data === t.studentId.stu_username)
         {
-        if(daytwo === t.task_name)
+        if(val === t.task_name)
         {
             id = 1;
             sub_link = t.submission_link;
-            console.log(t.task_name.length, daytwo.length, t.submission_link);
+            console.log(t.task_name.length, val.length, t.submission_link);
             
         }
     }
@@ -115,35 +115,39 @@ export default function TaskTwo({daytwo = {}})
     console.log(id, sub_link);
     function handleTaskSumbission(e)
     {
-        // const taskLink = document.getElementById("task_link").value;
-        // const comms = document.getElementById("comments").value;
-        // console.log(taskLink, comms);
-        //e.preventDefault();
-        {taskItem.map(({
-            task_name,
-            submission_date, 
-            submission_link,
-            task_link, 
-            comments, 
-            mentor_comment,
-            task_mark,
-            _id,
-            studentId}, i) => (data === studentId.studentFullName ? taskId = _id : id = 0)
-        )}
-        console.log(taskId, "Task Id", id)
-        {taskItem.map(t => {
-            if(data === t.studentId.studentFullName)
+        {studentDetails.map(s => {
+            taskItem.map(t => {
+            for(let j = 0; j < (s.taskName).length; j++){
+                console.log(s.taskName[j])
+            if(data === s.stu_username && val !== s.taskName[j])
             {
-            if(daytwo === t.task_name)
-            {
-                id = 1;
-                sub_link = t.submission_link;
-                console.log(t.task_name.length, daytwo.length, t.submission_link);
-                
+                id = 0;
+                console.log(id, "ID")
             }
-        }
+           
+            if(data === t.studentId.stu_username && val === s.taskName[j])
+            {
+                if(val === t.task_name)
+                {
+                    id = 1;
+                    taskId = t._id;
+                    sub_link = t.submission_link;
+                    console.log(s.courseName.length, val.length, s.taskName[j]);  
+                }
+            }
+            
+        }})
         })
-        console.log(id, sub_link);}
+        console.log(id, sub_link);
+        console.log(taskId, "Task Id", id);}
+        taskItem.map((t, i) => {
+            if(val === t.task_name)
+            {
+                //taskId = t._id
+                //id = 1;
+                //console.log("TaskId", taskId)
+            }
+        })
         if (validateForm()) {
             // Form is valid, you can submit or process the data here
             console.log("Form data:", formData);
@@ -151,6 +155,7 @@ export default function TaskTwo({daytwo = {}})
           }
         if(id === 0)
         {
+            //console.log(id, "ID")
             fetch("http://localhost:5000/api/task/submit",{
                 method: "POST",
                 headers: {
@@ -193,10 +198,12 @@ export default function TaskTwo({daytwo = {}})
                 <div className="card-header" id="headingOne">
                     <div className="row-lg-12 d-flex">
                         <div className="col-lg-10 mt-2">
-                        <span style={{fontWeight: "600"}}>Day-2 Task Link :  <a href="https://docs.google.com/document/d/1lkzy8u0rkW5v2jGvbJcJrmVVLjMqN_TmmsHkL41AoIc/preview"
+                        <span style={{fontWeight: "600"}}>Day-2 Task Link :
+                        <a href="https://docs.google.com/document/d/1QznT1zM4mI6dG0TODx5Xjs1GquMoSHO3xZ1USDnVM-w/preview"
                             id="task_link" target="_blank" style={{fontFamily: "sans-serif", color: "#884dff", fontSize: "16px", fontWeight: "700"}}>
-                                &nbsp;JavaScript - Datatypes
-                            </a></span>
+                                 &nbsp;JavaScript - Datatypes
+                        </a>
+                        </span>
                         </div>
                         <div className="col-lg-2">
                             <button className="btn btn-primary" data-toggle="collapse" data-target="#task" 

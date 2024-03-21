@@ -7,8 +7,8 @@ export default function HtmlClassOne()
     const location = useLocation();
     const { fromHome } = location.state;
     let data = fromHome.data;
-    //console.log("Day4",data);
     let name = "HTML- Day-1: HTML";
+    console.log("Html-Day1",data,name);
     return(
         <>
             <nav className="navbar navbar-expand-lg bg-primary">
@@ -27,14 +27,6 @@ export default function HtmlClassOne()
                                     &nbsp;&nbsp;Class
                             </a>
                         </Link>
-                        </li>
-                        <li className="nav-item">
-                        <Link to="/dashboard" state={{ fromHome: { data }}} style={{textDecoration: "none"}}>
-                            <a className="nav-link" href="#">
-                                <i className="bi bi-person-video"></i>
-                                    &nbsp;&nbsp;Dashboard
-                            </a>
-                        </Link>
                         </li>      
                         <li className="nav-item">
                         <Link to="/task_submit" state={{ fromHome: { data }}} style={{textDecoration: "none"}}>
@@ -43,12 +35,6 @@ export default function HtmlClassOne()
                                     &nbsp;&nbsp;Tasks
                             </a>
                         </Link>    
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">
-                                <i className="bi bi-patch-question-fill"></i>
-                                    &nbsp;&nbsp;Queries
-                            </a>
                         </li>
                     </ul>
                     <a className="navbar-brand" href="#">{data}</a>
