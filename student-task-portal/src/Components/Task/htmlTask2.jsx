@@ -119,14 +119,13 @@ export default function HtmlTaskTwo({val = {}})
             taskItem.map(t => {
             for(let j = 0; j < (s.taskName).length; j++){
                 console.log(s.taskName[j])
-            if(data === s.stu_username)
+            if(data === t.studentId.studentFullName)
             {
-                if(val !== t.task_name)
-                {
-                    id = 0;
+                if(t.task_name === val){
+                    id = id+1;
                     console.log(id, "ID")
-                    break;
                 }
+                    //break;
             }
            
             if(data === t.studentId.stu_username && val === s.taskName[j])
@@ -136,13 +135,13 @@ export default function HtmlTaskTwo({val = {}})
                     id = 1;
                     taskId = t._id;
                     sub_link = t.submission_link;
-                    console.log(s.courseName.length, val.length, s.taskName[j]);  
+                    console.log(s.courseName.length, val.length, s.taskName[j], sub_link);  
                 }
             }
             
         }})
         })
-        console.log(id, sub_link);
+        console.log(id, sub_link, val);
         console.log(taskId, "Task Id", id);}
         if (validateForm()) {
             // Form is valid, you can submit or process the data here
@@ -151,7 +150,7 @@ export default function HtmlTaskTwo({val = {}})
           }
         if(id === 0)
         {
-            fetch("http://localhost:5000/api/task/submit",{
+            fetch("https://studenttasksubmissionportal-database.onrender.com/api/task/submit",{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -169,7 +168,7 @@ export default function HtmlTaskTwo({val = {}})
             .catch((error) => console.log(error))
         }
         else{
-            fetch(`http://localhost:5000/api/task/update_stutask/${taskId}`,{
+            fetch(`https://studenttasksubmissionportal-database.onrender.com/api/task/update_stutask/${taskId}`,{
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",

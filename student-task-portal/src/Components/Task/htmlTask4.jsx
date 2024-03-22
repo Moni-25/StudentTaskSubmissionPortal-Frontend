@@ -121,11 +121,9 @@ export default function HtmlTaskFour({val = {}})
                 console.log(s.taskName[j])
             if(data === s.stu_username)
             {
-                if(val !== t.task_name)
-                {
-                    id = 0;
+                if(t.task_name === val){
+                    id = id+1;
                     console.log(id, "ID")
-                    break;
                 }
             }
            
@@ -151,7 +149,7 @@ export default function HtmlTaskFour({val = {}})
           }
         if(id === 0)
         {
-            fetch("http://localhost:5000/api/task/submit",{
+            fetch("https://studenttasksubmissionportal-database.onrender.com/api/task/submit",{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -169,7 +167,7 @@ export default function HtmlTaskFour({val = {}})
             .catch((error) => console.log(error))
         }
         else{
-            fetch(`http://localhost:5000/api/task/update_stutask/${taskId}`,{
+            fetch(`https://studenttasksubmissionportal-database.onrender.com/api/task/update_stutask/${taskId}`,{
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",

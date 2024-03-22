@@ -19,7 +19,7 @@ export default function SignUp()
 
     const [errors, setErrors] = useState({});
     const [submitted, setSubmitted] = useState(false);
-
+    let len = 0;
     const validateForm = () => 
     {
         let isValid = true;
@@ -70,12 +70,16 @@ export default function SignUp()
             isValid = false;
           }
          
-          let len = formData.phone;
+          len = formData.phone;
           console.log(len.length)
           if (formData.phone === "already") {
               newErrors.phone = "Phone Number Already Exit";
             isValid = false;
           }
+          if(len.length != 10){
+            newErrors.phone = "Phone Number Invalid";
+          isValid = false;
+        }
           
         if (!formData.course) {
           newErrors.course = "Course Name is required";
@@ -125,8 +129,8 @@ export default function SignUp()
             //console.log("Form data:", formData);
             setSubmitted(true); // Set a submitted flag
           }
-          if(formData.user !== "already" && formData.email !== "already" && formData.phone !== "already"){
-        fetch("http://localhost:5000/api/auth/create",{
+          if(formData.user !== "already" && formData.email !== "already" && formData.phone !== "already" && len.length === 10){
+        fetch("https://studenttasksubmissionportal-database.onrender.com/api/auth/create",{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

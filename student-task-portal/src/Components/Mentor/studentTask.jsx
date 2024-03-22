@@ -33,11 +33,12 @@ export default function StudentTaskDetails()
     console.log("hi",mark, comm)
     var no_record = "false";
     {taskItem.map(({studentId},i) => {
-        if(data1.stu !== studentId.studentFullName)
+        if(data1.stu === studentId.studentFullName)
         {
             no_record = "true";
         }
     })}
+    console.log(no_record)
     function handleMentor(e)
     {
         e.preventDefault();
@@ -52,7 +53,7 @@ export default function StudentTaskDetails()
             }
         })
         console.log(taskId)
-        fetch(`http://localhost:5000/api/task/update/${taskId}`,{
+        fetch(`https://studenttasksubmissionportal-database.onrender.com/api/task/update/${taskId}`,{
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
@@ -86,7 +87,10 @@ export default function StudentTaskDetails()
                             </a>
                         </li>  
                     </ul>
-                    <span className="navbar-brand" href="#">{data1.mentor}</span>
+                    <Link to="/">
+                        <a className="navbar-brand" href="#">{data1.mentor}</a>
+                    </Link>
+                    {/* <span className="navbar-brand" href="#">{data1.mentor}</span> */}
                 </div>
                 </div>
             </nav>
@@ -162,7 +166,7 @@ export default function StudentTaskDetails()
                     </div>
                     : ""))}
 
-                    {no_record === "true" ? <div className="text-center mb-4 pt-2" style={{
+                    {no_record === "false" ? <div className="text-center mb-4 pt-2" style={{
                         border: "2px solid black", 
                         borderRadius: "12px",
                         width: "80%",

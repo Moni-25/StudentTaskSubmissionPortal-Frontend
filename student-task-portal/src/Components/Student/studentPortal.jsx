@@ -36,7 +36,9 @@ export default function StudentPortal()
                         </Link>
                         </li>
                     </ul>
-                    <span className="navbar-brand" href="#">{data}</span>
+                    <Link to="/">
+                        <a className="navbar-brand" href="#">{data}</a>
+                    </Link>
                 </div>
                 </div>
             </nav>

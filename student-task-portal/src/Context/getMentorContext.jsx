@@ -11,7 +11,7 @@ export default function MentorContextProvide({children})
     async function getMentorData()
     {
         try{
-            const res = await fetch("http://localhost:5000/api/mentor");
+            const res = await fetch("https://studenttasksubmissionportal-database.onrender.com/api/mentor");
             const result = await res.json();
             setMentor(result.data);
         }

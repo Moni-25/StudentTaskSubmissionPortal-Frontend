@@ -24,7 +24,7 @@ export default function Mentor()
 
     const [errors, setErrors] = useState({});
     const [submitted, setSubmitted] = useState(false);
-
+    let len = 0;
     function handleInputChange(e)
     {
         //e.preventDefault();
@@ -85,10 +85,16 @@ export default function Mentor()
             newErrors.phoneNo = "Phone Number is required";
             isValid = false;
           }
+          len = formData.phoneNo;
+          console.log(len.length)
           if (formData.phoneNo === "already") {
               newErrors.phoneNo = "Phone Number Already Exit";
-              isValid = false;
+            isValid = false;
           }
+          if(len.length != 10){
+            newErrors.phoneNo = "Phone Number Invalid";
+          isValid = false;
+        }
           
         if (!formData.course) {
           newErrors.course = "Course Name is required";
@@ -112,8 +118,8 @@ export default function Mentor()
             console.log("Form data:", formData);
             setSubmitted(true); // Set a submitted flag
           }
-          if(formData.username !== "already" && formData.email !== "already" && formData.phoneNo !== "already"){
-        fetch("http://localhost:5000/api/mentor/createMentor",{
+          if(formData.username !== "already" && formData.email !== "already" && formData.phoneNo !== "already" && len.length === 10){
+        fetch("https://studenttasksubmissionportal-database.onrender.com/api/mentor/createMentor",{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -165,7 +171,10 @@ export default function Mentor()
                         </Link>
                         </li>  
                     </ul>
-                    <span className="navbar-brand" href="#">{data}</span>
+                    <Link to="/">
+                        <a className="navbar-brand" href="#">{data}</a>
+                    </Link>
+                    {/* <span className="navbar-brand" href="#">{data}</span> */}
                 </div>
                 </div>
             </nav>

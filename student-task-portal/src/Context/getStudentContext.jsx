@@ -11,7 +11,7 @@ export default function StudentContextProvider({children})
     async function getStudentData()
     {
         try{
-            const res = await fetch("http://localhost:5000/api/auth");
+            const res = await fetch("https://studenttasksubmissionportal-database.onrender.com/api/auth");
             const result = await res.json();
             setStudentLogin(result.data);
         }

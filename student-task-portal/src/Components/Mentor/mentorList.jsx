@@ -45,7 +45,10 @@ export default function MentorList()
                         </Link>
                         </li>  
                     </ul>
-                    <span className="navbar-brand" href="#">{data}</span>
+                    <Link to="/">
+                        <a className="navbar-brand" href="#">{data}</a>
+                    </Link>
+                    {/* <span className="navbar-brand" href="#">{data}</span> */}
                 </div>
                 </div>
             </nav>
@@ -65,7 +68,7 @@ export default function MentorList()
                 <th>Mentor Name</th>
                 <th>Email</th>
                 <th>Phone Number</th>
-                <th>Address</th>
+                <th colSpan="4">Address</th>
               </tr>
             </thead>
             {mentorDetails.map(({address, mentorName,mentor_email,mentor_phoneNo, studentId}, i) => (
@@ -79,7 +82,7 @@ export default function MentorList()
                     studentId.map(({studentFullName,email, phoneNumber, courseName}, index) => ( 
                     <td>{courseName}</td>
                     ))
-                    : ""}
+                    : <td>Course Not Assigned Yet</td>}
                   </tr>           
             </tbody>
             ))}

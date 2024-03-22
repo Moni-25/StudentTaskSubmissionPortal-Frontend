@@ -156,7 +156,7 @@ export default function Task({val = {}})
         if(id === 0)
         {
             //console.log(id, "ID")
-            fetch("http://localhost:5000/api/task/submit",{
+            fetch("https://studenttasksubmissionportal-database.onrender.com/api/task/submit",{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -174,7 +174,7 @@ export default function Task({val = {}})
             .catch((error) => console.log(error))
         }
         else if(id === 1){
-            fetch(`http://localhost:5000/api/task/update_stutask/${taskId}`,{
+            fetch(`https://studenttasksubmissionportal-database.onrender.com/api/task/update_stutask/${taskId}`,{
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",

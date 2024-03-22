@@ -37,7 +37,10 @@ export default function MentotProfile()
                         </Link>
                         </li>  
                     </ul>
-                    <span className="navbar-brand" href="#">{data}</span>
+                    <Link to="/">
+                        <a className="navbar-brand" href="#">{data}</a>
+                    </Link>
+                    {/* <span className="navbar-brand" href="#">{data}</span> */}
                 </div>
                 </div>
             </nav>

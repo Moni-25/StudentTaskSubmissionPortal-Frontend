@@ -44,7 +44,9 @@ export default function TaskSubmit()
                         </Link>
                         </li>
                     </ul>
-                    <a className="navbar-brand" href="#">{data}</a>
+                    <Link to="/">
+                        <a className="navbar-brand" href="#">{data}</a>
+                    </Link>
                     </div>
                 </div>
             </nav>

@@ -11,7 +11,7 @@ export default function TaskContextProvider({children})
     async function getAllTask()
     {
         try{
-            const res = await fetch("http://localhost:5000/api/task");
+            const res = await fetch("https://studenttasksubmissionportal-database.onrender.com/api/task");
             const result = await res.json();
             setAllTask(result.data);
         }

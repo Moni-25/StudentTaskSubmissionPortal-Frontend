@@ -38,7 +38,10 @@ export default function ClassDetails()
                         </Link>
                         </li>
                     </ul>
-                    <a className="navbar-brand" href="#">{data}</a>
+                    <Link to="/">
+                        <a className="navbar-brand" href="#">{data}</a>
+                    </Link>
+                    {/* <a className="navbar-brand" href="#">{data}</a> */}
                     </div>
                 </div>
             </nav>

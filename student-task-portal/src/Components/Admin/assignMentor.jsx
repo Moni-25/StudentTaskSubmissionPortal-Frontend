@@ -106,7 +106,7 @@ export default function AssignMentor()
         // .then((response) => response.json())
         // .then((response) => console.log(response))
         // .catch((error) => console.log(error))
-        fetch("http://localhost:5000/api/auth/update_mentor",{
+        fetch("https://studenttasksubmissionportal-database.onrender.com/api/auth/update_mentor",{
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
@@ -117,7 +117,7 @@ export default function AssignMentor()
         .then((response) => response.json())
         .then((response) => console.log(response))
         .catch((error) => console.log(error))
-        fetch("http://localhost:5000/api/mentor/assign_mul_students",{
+        fetch("https://studenttasksubmissionportal-database.onrender.com/api/mentor/assign_mul_students",{
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
@@ -169,7 +169,10 @@ export default function AssignMentor()
                         </Link>
                         </li>  
                     </ul>
-                    <span className="navbar-brand" href="#">{data}</span>
+                    <Link to="/">
+                        <a className="navbar-brand" href="#">{data}</a>
+                    </Link>
+                    {/* <span className="navbar-brand" href="#">{data}</span> */}
                 </div>
                 </div>
             </nav>
@@ -203,7 +206,7 @@ export default function AssignMentor()
                             </select> */}
                             <div className="form-check m-3 col-lg-8">
                             {studentDetails.map(({studentFullName, courseName, mentorId}, i) => 
-                            (mentorId.length === 0 ?
+                            (!mentorId ?
                             <div>
                                 <input
                                 className="form-check-input"
@@ -219,7 +222,8 @@ export default function AssignMentor()
                                     {studentFullName} - {courseName}
                                 </label>
                             </div>
-                            : "No Student Found"))}
+                            : ""))}
+                            {/* : "No Student Found")) */}
                             </div>
                         </div>
 

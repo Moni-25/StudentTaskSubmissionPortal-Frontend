@@ -11,6 +11,33 @@ export default function Mark({state = {}})
     const data2 = data1.stu;
     const {taskItem = []} = useContext(taskContext);
     const [formData, setFormData] = useState();
+    let taskval = "", id = 0;
+    let taskId = 0, task_comm = "", mark = "";
+    {taskItem.map(({
+        task_name,
+        _id,
+        submission_date, 
+        submission_link,
+        task_link, 
+        comments, 
+        mentor_comment,
+        task_mark,
+        studentId}, i) => {
+            if(studentId.studentFullName === data1.stu)
+            {
+                if(data1.task === task_name){ 
+                    taskval = task_name 
+                    taskId = _id
+                    mark = task_mark
+                    task_comm = mentor_comment
+                }
+                if(mark === undefined && task_comm === undefined)
+                {
+                    id = 1;
+                }
+            }
+        })}
+        console.log(taskval, taskId, id, mark, task_comm)
     function handleTaskInput(e)
     {
         // mark = document.getElementById("task_mark").value;
@@ -29,17 +56,16 @@ export default function Mark({state = {}})
     {
         e.preventDefault();
         console.log(e.target.value, e.target.id)
-        let taskId = 0;
         // let taskname = document.getElementById("taskName").value;
         // console.log(taskname, "task");
-        taskItem.map((taskVal,i) => {
-            if(data1.task === taskVal.task_name)
-            {
-                taskId = taskVal._id;            
-            }
-        })
+        // taskItem.map((taskVal,i) => {
+        //     if(data1.task === taskVal.task_name)
+        //     {
+        //         taskId = taskVal._id;            
+        //     }
+        // })
         console.log(taskId, "task")
-        fetch(`http://localhost:5000/api/task/update/${taskId}`,{
+        fetch(`https://studenttasksubmissionportal-database.onrender.com/api/task/update/${taskId}`,{
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
@@ -73,7 +99,10 @@ export default function Mark({state = {}})
                             </a>
                         </li>  
                     </ul>
-                    <span className="navbar-brand" href="#">{data1.mentor}</span>
+                    <Link to="/">
+                        <a className="navbar-brand" href="#">{data1.mentor}</a>
+                    </Link>
+                    {/* <span className="navbar-brand" href="#">{data1.mentor}</span> */}
                 </div>
                 </div>
             </nav>
@@ -92,15 +121,7 @@ export default function Mark({state = {}})
                     </button>
                 </Link>
                 
-            {taskItem.map(({
-                        task_name,
-                        submission_date, 
-                        submission_link,
-                        task_link, 
-                        comments, 
-                        mentor_comment,
-                        task_mark,
-                        studentId}, i) => (data1.task === task_name ?
+            
                             <div className="card-body ms-4 mb-3 mt-3" style={{width: "42rem", border: "2px solid #aaff80", borderRadius: "12px"}}>
                             <div className="row-lg-12 ms-1 d-flex">
                                 <div className="col-lg-3">
@@ -129,12 +150,20 @@ export default function Mark({state = {}})
                                 </div>
                                 <div className="col-lg-8">
                                     <label htmlFor="" className="form-label" style={{fontWeight: "600", fontSize:"17px"}}>
-                                        {data1.task}
+                                        {taskval}
                                     </label>
                                 </div>
                             </div>
-                    
-                    {task_mark === undefined ?
+                            {/* {taskItem.map(({
+                        task_name,
+                        submission_date, 
+                        submission_link,
+                        task_link, 
+                        comments, 
+                        mentor_comment,
+                        task_mark,
+                        studentId}, i) => (data1.task === task_name ?<div>         */}
+                    {id === 1 ?
                     <div className="row-lg-12 ms-1 mt-1 d-flex">
                             <div className="col-lg-3">
                                 <label htmlFor="" className="form-label" style={{fontSize:"16px"}}>
@@ -163,14 +192,24 @@ export default function Mark({state = {}})
                         <span style={{fontWeight:"700"}}>:</span>
                     </div>
                     <div className="col-lg-8">
-                    <input type="text" className="form-control" id="task_mark" value={task_mark} 
+                        {/* {taskItem.map(({
+                        task_name,
+                        submission_date, 
+                        submission_link,
+                        task_link, 
+                        comments, 
+                        mentor_comment,
+                        task_mark,
+                        studentId}, i) => (data1.task === task_name ? */}
+                    <input type="text" className="form-control" id="task_mark" value={mark} 
                             required style={{fontSize: "16px", width:"100%", height: "50px", borderRadius: "10px"}}
-                            disabled readOnly/>
+                            disabled readOnly/> 
+                            {/* : ""))} */}
                     </div>
                     </div>
                     }
-                    {mentor_comment === undefined ?
-                            <div className="row-lg-12 ms-1 mt-1 d-flex">
+                    {id === 1 ?
+                            <div className="row-lg-12 ms-1 d-flex">
                             <div className="col-lg-3">
                                 <label htmlFor="" className="form-label" style={{fontSize:"16px"}}>
                                     Comments <span style={{color:"red", fontSize: "20px"}}>*</span>
@@ -196,14 +235,14 @@ export default function Mark({state = {}})
                                 <span style={{fontWeight:"700"}}>:</span>
                             </div>
                             <div className="col-lg-8">
-                            <input type="text" className="form-control" id="mentor_comment" value={mentor_comment}
+                            <input type="text" className="form-control" id="mentor_comment" value={task_comm}
                                     required style={{fontSize: "16px", width:"100%", height: "60px", borderRadius: "10px"}}
                                     disabled readOnly/>
                             </div>
                             </div>
-                            }
+                        }
 
-                        {task_mark === undefined && mentor_comment === undefined ?
+                        {id === 1 ?
                             <div className="text-center mt-3">
                                 <button type="button" className="btn btn-outline-primary" 
                                     style={{width: "15%", color: "black", fontWeight: "bold"}}
@@ -221,7 +260,9 @@ export default function Mark({state = {}})
                         </div>
                         }
                     </div>
+{/*                 
                     : ""))}
+                    </div> */}
             </div>
         </>
     )

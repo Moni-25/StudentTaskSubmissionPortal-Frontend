@@ -37,28 +37,42 @@ export default function MentorPortal()
                         </Link>
                         </li>  
                     </ul>
-                    <span className="navbar-brand" href="#">{data}</span>
+                    <Link to="/">
+                        <a className="navbar-brand" href="#">{data}</a>
+                    </Link>
+                    {/* <span className="navbar-brand" href="#">{data}</span> */}
                 </div>
                 </div>
             </nav>
-
+            <div className="card-header mt-3 text-center" style={{backgroundColor: "#ff8080", width:"45rem", 
+                    fontSize:"20px", 
+                    fontWeight: "700",
+                    height:"50px",
+                    border: "2px solid #bf80ff", 
+                    borderRadius: "15px",
+                    position: "absolute",
+                    top: "15%",
+                    left: "50%",
+                    transform: "translate(-50%, 0%)"}}>
+                    <p>Profile</p>
+                </div>
             <div className="container" style={{
                 width: "45rem", 
                 border: "2px solid #bf80ff", 
                 borderRadius: "15px",
                 position: "absolute",
-                top: "20%",
+                top: "28%",
                 left: "50%",
                 transform: "translate(-50%, 0%)"
             }}>
-                <div className="card-header mt-3 text-center" style={{backgroundColor: "#ff8080", width:"40%", 
+                {/* <div className="card-header mt-3 text-center" style={{backgroundColor: "#ff8080", width:"40%", 
                     fontSize:"18px", 
                     fontWeight: "700",
                     height:"45px",
                     marginLeft:"30%",
                     borderRadius:"12px"}}>
                     Profile
-                </div>
+                </div> */}
                 {mentorDetails.map(({mentorName, mentor_username, mentor_email, mentor_phoneNo, address}, i) => (data === mentorName ?
                     <div className="card-body">
                         <div className="row-lg-12 ms-1 d-flex">
