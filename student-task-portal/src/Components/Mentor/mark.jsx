@@ -6,7 +6,7 @@ export default function Mark({state = {}})
 {
     const location = useLocation();
     const data1  = location.state;
-    console.log(data1.stu, data1.mentor, data1.task)
+    //console.log(data1.stu, data1.mentor, data1.task)
     const data = data1.mentor;
     const data2 = data1.stu;
     const {taskItem = []} = useContext(taskContext);
@@ -37,12 +37,12 @@ export default function Mark({state = {}})
                 }
             }
         })}
-        console.log(taskval, taskId, id, mark, task_comm)
+        //console.log(taskval, taskId, id, mark, task_comm)
     function handleTaskInput(e)
     {
         // mark = document.getElementById("task_mark").value;
         // comm = document.getElementById("mentor_comment").value;
-        console.log(e.target.value, e.target.id)
+        //console.log(e.target.value, e.target.id)
         if (e) {
             const formCopy = {
               ...formData,
@@ -55,7 +55,7 @@ export default function Mark({state = {}})
     function handleMark(e)
     {
         e.preventDefault();
-        console.log(e.target.value, e.target.id)
+        //console.log(e.target.value, e.target.id)
         // let taskname = document.getElementById("taskName").value;
         // console.log(taskname, "task");
         // taskItem.map((taskVal,i) => {
@@ -64,7 +64,7 @@ export default function Mark({state = {}})
         //         taskId = taskVal._id;            
         //     }
         // })
-        console.log(taskId, "task")
+        //console.log(taskId, "task")
         fetch(`https://studenttasksubmissionportal-database.onrender.com/api/task/update/${taskId}`,{
             headers: {
                 Accept: "application/json",

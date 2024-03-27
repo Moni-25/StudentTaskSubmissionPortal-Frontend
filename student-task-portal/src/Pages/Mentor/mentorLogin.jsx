@@ -52,13 +52,13 @@ export default function MentorLogin()
         let users = "";
         if (validateForm()) {
             // Form is valid, you can submit or process the data here
-            console.log("Form data:", formData);
+            //console.log("Form data:", formData);
             setSubmitted(true); // Set a submitted flag
           }
-        console.log("Form data:", formData);
+        //console.log("Form data:", formData);
         const user = formData.mentorUsername;
         const pass = formData.mentorPassword;
-        console.log(user, pass, "Mentor", mentorDetails);
+        //console.log(user, pass, "Mentor", mentorDetails);
         mentorDetails.map((mentorData, index) => {
             if(user === mentorData.mentor_username && pass === mentorData.mentor_password){
                 login_status = "true";
@@ -67,9 +67,9 @@ export default function MentorLogin()
         }
         )
         const data = users
-        console.log(login_status)
+        //console.log(login_status)
         if(login_status === "true"){
-            console.log(`${users} Login Successfully!!!`);
+            //console.log(`${users} Login Successfully!!!`);
             alert(`${users} Logged In Successfully!!!`);
             navigate("/mentor_portal", {state:{ fromHome: { data }}});
         }

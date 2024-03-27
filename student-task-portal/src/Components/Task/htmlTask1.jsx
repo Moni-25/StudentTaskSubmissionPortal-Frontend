@@ -8,7 +8,7 @@ export default function HtmlTaskOne({val = {}})
     const location = useLocation();
     const { fromHome } = location.state;
     let data = fromHome.data;
-    console.log("Day4-Task",data, val);
+    //console.log("Day4-Task",data, val);
 
     const navigate = useNavigate();
 
@@ -56,7 +56,7 @@ export default function HtmlTaskOne({val = {}})
             if(data === task.stu_username){
                 login_status = "true";
                 stuId = task._id;
-                console.log(task.studentFullName, login_status, stuId)
+                //console.log(task.studentFullName, login_status, stuId)
             }
         }
         )
@@ -107,23 +107,23 @@ export default function HtmlTaskOne({val = {}})
         {
             id = 1;
             sub_link = t.submission_link;
-            console.log(t.task_name.length, val.length, t.submission_link);
+            //console.log(t.task_name.length, val.length, t.submission_link);
             
         }
     }
     })
-    console.log(id, sub_link);
+    //console.log(id, sub_link);
     function handleTaskSumbission(e)
     {
         {studentDetails.map(s => {
             taskItem.map(t => {
             for(let j = 0; j < (s.taskName).length; j++){
-                console.log(s.taskName[j])
+                //console.log(s.taskName[j])
             if(data === s.stu_username)
             {
                 if(t.task_name === val){
                     id = id+1;
-                    console.log(id, "ID")
+                    //console.log(id, "ID")
                 }
                 // if(val !== t.task_name)
                 // {
@@ -140,17 +140,18 @@ export default function HtmlTaskOne({val = {}})
                     id = 1;
                     taskId = t._id;
                     sub_link = t.submission_link;
-                    console.log(s.courseName.length, val.length, s.taskName[j]);  
+                    //console.log(s.courseName.length, val.length, s.taskName[j]);  
                 }
             }
             
         }})
         })
-        console.log(id, sub_link);
-        console.log(taskId, "Task Id", id);}
+        //console.log(id, sub_link);
+        //console.log(taskId, "Task Id", id);
+    }
         if (validateForm()) {
             // Form is valid, you can submit or process the data here
-            console.log("Form data:", taskData);
+            //console.log("Form data:", taskData);
             setSubmitted(true); // Set a submitted flag
           }
         if(id === 0)

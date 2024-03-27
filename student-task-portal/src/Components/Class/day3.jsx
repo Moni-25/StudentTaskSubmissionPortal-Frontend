@@ -7,7 +7,7 @@ export default function ClassThree()
     const location = useLocation();
     const { fromHome } = location.state;
     let data = fromHome.data;
-    console.log("Day1",data);
+    //console.log("Day1",data);
     let name = "JavaScript - Day -3: JS array & objects";
     return(
         <>

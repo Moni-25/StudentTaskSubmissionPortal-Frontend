@@ -52,13 +52,13 @@ export default function Admin()
         let users = "";
         if (validateForm()) {
             // Form is valid, you can submit or process the data here
-            console.log("Form data:", formData);
+            //console.log("Form data:", formData);
             setSubmitted(true); // Set a submitted flag
           }
-        console.log("Form data:", formData);
+        //console.log("Form data:", formData);
         const user = formData.adminUsername;
         const pass = formData.adminPassword;
-        console.log(user, pass, "Admin", admin);
+        //console.log(user, pass, "Admin", admin);
         admin.map((adminData, index) => {
             if(user === adminData.admin_user && pass === adminData.admin_pass){
                 login_status = "true";
@@ -67,9 +67,9 @@ export default function Admin()
         }
         )
         const data = users
-        console.log(login_status)
+        //console.log(login_status)
         if(login_status === "true"){
-            console.log(`${users} Login Successfully!!!`);
+            //console.log(`${users} Login Successfully!!!`);
             alert(`${users} Login Successfully!!!`);
             navigate("/admin_portal", {state:{ fromHome: { data }}});
         }

@@ -11,19 +11,19 @@ export default function CourseMap({state = {}})
     const location = useLocation();
     const { fromHome } = location.state;
     let data = fromHome.data;
-    console.log("Coursemap", data);
+    //console.log("Coursemap", data);
     const {courseItems = []} = useContext(courseContext);
     const {htmlItems = []} = useContext(htmlcontext);
     const {studentDetails = []} = useContext(studentContext);
-    console.log("Course", courseItems)
+    //console.log("Course", courseItems)
     let java ="", stack ="";
     let course="";
     {studentDetails.map(t => {
-        console.log(t.stu_username, data)
+        //console.log(t.stu_username, data)
         if(data === t.stu_username)
         {
             course = t.courseName;
-            console.log(data, course)
+            //console.log(data, course)
         }
     })}
     return(

@@ -8,7 +8,7 @@ export default function ClassDetails()
     const location = useLocation();
     const { fromHome } = location.state;
     let data = fromHome.data;
-    console.log(data)
+    //console.log(data)
 
     return(
         <>

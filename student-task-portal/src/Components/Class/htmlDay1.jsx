@@ -8,7 +8,7 @@ export default function HtmlClassOne()
     const { fromHome } = location.state;
     let data = fromHome.data;
     let name = "HTML- Day-1: HTML";
-    console.log("Html-Day1",data,name);
+    //console.log("Html-Day1",data,name);
     return(
         <>
             <nav className="navbar navbar-expand-lg bg-primary">

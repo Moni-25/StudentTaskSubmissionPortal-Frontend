@@ -7,7 +7,7 @@ export default function MentorPortal()
     const location = useLocation();
     const { fromHome } = location.state;
     let data = fromHome.data;
-    console.log(data)
+    //console.log(data)
     const {mentorDetails=[]} = useContext(mentorContext)
     return(
         <>

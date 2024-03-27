@@ -7,7 +7,7 @@ export default function ClassTwo()
     const location = useLocation();
     const { fromHome } = location.state;
     let data = fromHome.data;
-    console.log("Day2",data);
+    //console.log("Day2",data);
     let name = "JavaScript - Day -2: Datatypes";
     return(
         <>

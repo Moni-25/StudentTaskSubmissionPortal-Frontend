@@ -7,7 +7,7 @@ export default function ClassOne()
     const location = useLocation();
     const { fromHome } = location.state;
     let data = fromHome.data;
-    console.log("Day1",data);
+    //console.log("Day1",data);
     let name = "JavaScript - Day -1: Introduction to Browser & web";
     return(
         <>

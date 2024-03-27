@@ -20,7 +20,24 @@ export default function AssignMentor()
         response: [],
     });
 
-    var stu_id = [], men_id = 0, stu_course = [];
+    var stu_id = [], men_id = 0, stu_course = [], nostu = 0, nomen = 0;
+    studentDetails.map(stufound => {
+        if(stufound.studentFullName)
+        {
+            if(stufound.mentorId === undefined){
+                nostu = 1;
+            }
+        }
+    })
+    mentorDetails.map(menfound => {
+        if(menfound.mentorName)
+        {
+            if(menfound.studentId.length === 0){
+                nomen = 1;
+                //console.log(nomen)
+            }
+        }
+    })
 
     function handleCheckBoxChange(e)
     {
@@ -68,10 +85,10 @@ export default function AssignMentor()
             if(e.target.value == menVal.mentorName)
             {
                 men_id = menVal._id;
-                console.log(men_id, menVal.mentorName)
+                //console.log(men_id, menVal.mentorName)
             } 
         })
-        console.log(userinfo)
+        //console.log(userinfo)
         if (e) {
             const formCopy = {
               ...formData,
@@ -205,7 +222,8 @@ export default function AssignMentor()
                                 )}
                             </select> */}
                             <div className="form-check m-3 col-lg-8">
-                            {studentDetails.map(({studentFullName, courseName, mentorId}, i) => 
+                            {nostu === 1 ?  
+                            (studentDetails.map(({studentFullName, courseName, mentorId}, i) => 
                             (!mentorId ?
                             <div>
                                 <input
@@ -222,7 +240,7 @@ export default function AssignMentor()
                                     {studentFullName} - {courseName}
                                 </label>
                             </div>
-                            : ""))}
+                            : ""))) : "No Student Found"}
                             {/* : "No Student Found")) */}
                             </div>
                         </div>
@@ -236,11 +254,14 @@ export default function AssignMentor()
                             
                             <select className="form-select" aria-label="Default select" id="mentorName" onChange={handleInputChange}>
                                 <option value="" selected>Choose Mentor For Student</option>
-                                {mentorDetails.map(({mentorName, studentId}, index) => 
+                                {nomen === 1 ? 
+                                (mentorDetails.map(({mentorName, studentId}, index) => 
                                 (studentId.length === 0 ? 
                                     <option value={mentorName}>{mentorName}</option>
                                     : ""
-                                ))}
+                                ))) :
+                                    <option>No Mentor Available</option>
+                                }
                             </select>
                         </div>
 

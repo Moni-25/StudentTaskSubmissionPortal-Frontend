@@ -16,7 +16,7 @@ export default function Student()
         e.preventDefault();
         const user = document.getElementById("student_username").value;
         let users = "";
-        console.log(user, studentDetails);
+        //console.log(user, studentDetails);
         studentDetails.map((da, index) => {
             if(user === da.studentFullName){
                 login_status = "true";
@@ -25,14 +25,14 @@ export default function Student()
         }
         )
         const data = {users}
-        console.log(login_status)
+        //console.log(login_status)
         if(login_status === "true"){
-            console.log(`${users} Login Successfully!!!`);
+            //console.log(`${users} Login Successfully!!!`);
             alert("Login Successfully!!!");
             navigate("/student_portal", {state: data});
         }
         else{
-            console.log("Username or Password Incorrect");
+            //console.log("Username or Password Incorrect");
         }
         //console.log(studentLogin)
     }

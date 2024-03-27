@@ -19,24 +19,24 @@ export default function StudentList()
         stuName
     }
     ]
-    console.log(mentorDetails)
+    //console.log(mentorDetails)
     mentorDetails.map((menData, index) => {
-        console.log("Data", data, menData.mentorName)
+        //console.log("Data", data, menData.mentorName)
         for(let i = 0; i < (menData.studentId).length; i++)
         {
             if(data === menData.mentorName)
             {
-                console.log("Student", menData.studentId[i].studentFullName, menData.studentId[i].email)
+                //console.log("Student", menData.studentId[i].studentFullName, menData.studentId[i].email)
                 email[i] = menData.studentId[i].email;
                 stuName[i] = menData.studentId[i].studentFullName;
             }
           } 
         
 });
-     console.log("Email", email, men)
+     //console.log("Email", email, men)
     return(
         <div className="mt-5">
-          <table className="table table-borderless table-hover">
+          <table className="table table-bordered table-hover" style={{border: "2px solid #66b3ff"}}>
             <thead>
               <tr className="table-danger text-center">
                 <th>Sl.No</th>
@@ -72,7 +72,12 @@ export default function StudentList()
                 ))
             : ""}   
             </tbody>
-          ))) : "0"}
+          ))) : 
+          <tbody>
+              <tr style={{textAlign: "center", fontSize: "19px", padding: "5px 5px"}}>
+                <td colSpan="6">No Student Assigned Yet</td>
+              </tr>
+          </tbody>}
 
             {/* {taskItem.map(({studentId}, i) => (
             <tbody>

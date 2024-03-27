@@ -9,7 +9,7 @@ export default function Mentor()
     const location = useLocation();
     const { fromHome } = location.state;
     let data = fromHome.data;
-    console.log(data)
+    //console.log(data)
     const { mentorDetails = [] } = useContext(mentorContext);
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
@@ -28,7 +28,7 @@ export default function Mentor()
     function handleInputChange(e)
     {
         //e.preventDefault();
-        console.log(e.target.value, e.target.id)
+        //console.log(e.target.value, e.target.id)
         const { name, value } = e.target;
     
         if (e) {
@@ -52,7 +52,7 @@ export default function Mentor()
           isValid = false;
         }
         let user = document.getElementById("mentor_username").value;
-    console.log(user)
+    //console.log(user)
         {mentorDetails.map(s => (formData.username === s.mentor_username ?  
             formData.username = "already": ""))}
         if (!formData.username) {
@@ -86,7 +86,7 @@ export default function Mentor()
             isValid = false;
           }
           len = formData.phoneNo;
-          console.log(len.length)
+          //console.log(len.length)
           if (formData.phoneNo === "already") {
               newErrors.phoneNo = "Phone Number Already Exit";
             isValid = false;
@@ -115,7 +115,7 @@ export default function Mentor()
         e.preventDefault();
         if (validateForm()) {
             // Form is valid, you can submit or process the data here
-            console.log("Form data:", formData);
+            //console.log("Form data:", formData);
             setSubmitted(true); // Set a submitted flag
           }
           if(formData.username !== "already" && formData.email !== "already" && formData.phoneNo !== "already" && len.length === 10){
@@ -196,6 +196,7 @@ export default function Mentor()
                         <div className="row-lg-12 d-flex">
                             <div className="col-lg-4">
                                 <label htmlFor="mentorName" className="form-label">Fullname</label>
+                                <span className="ms-2" style={{color: "red", fontSize: "20px"}}>*</span>
                             </div>
                             <input type="text" className="form-control" id="mentorName" name="mentor_name" placeholder="Enter Mentor Fullname" onChange={handleInputChange}
                                 required/>
@@ -211,6 +212,7 @@ export default function Mentor()
                         <div className="row-lg-12 mt-2 d-flex">
                             <div className="col-lg-4">
                                 <label htmlFor="mentor_username" className="form-label">Username</label>
+                                <span className="ms-2" style={{color: "red", fontSize: "20px"}}>*</span>
                             </div>
                             <input type="text" className="form-control" id="mentor_username" name="username" placeholder="Mentor Username" onChange={handleInputChange}/>
                         </div>
@@ -225,6 +227,7 @@ export default function Mentor()
                         <div className="row-lg-12 mt-2 d-flex">
                             <div className="col-lg-4">
                                 <label htmlFor="mentor_password" className="form-label">Password</label>
+                                <span className="ms-2" style={{color: "red", fontSize: "20px"}}>*</span>
                             </div>
                             <input type="password" className="form-control" id="mentor_password" name="password" placeholder="Mentor Password" onChange={handleInputChange}/>
                         </div>
@@ -239,6 +242,7 @@ export default function Mentor()
                         <div className="row-lg-12 mt-2 d-flex">
                             <div className="col-lg-4">
                                 <label htmlFor="mentor_email" className="form-label">Email</label>
+                                <span className="ms-2" style={{color: "red", fontSize: "20px"}}>*</span>
                             </div>
                             <input type="text" className="form-control" id="mentor_email" name="email" placeholder="email@gmail.com" onChange={handleInputChange}/>
                         </div>
@@ -253,6 +257,7 @@ export default function Mentor()
                         <div className="row-lg-12 mt-2 d-flex">
                             <div className="col-lg-4">
                                 <label htmlFor="mentor_phoneNo" className="form-label">Phone Number</label>
+                                <span className="ms-2" style={{color: "red", fontSize: "20px"}}>*</span>
                             </div>
                             <input type="text" className="form-control" id="mentor_phoneNo" name="phoneNo" placeholder="+91 9078563412" onChange={handleInputChange}/>
                         </div>
@@ -290,6 +295,7 @@ export default function Mentor()
                         <div className="row-lg-12 mt-2 d-flex">
                         <div className="col-lg-4">
                                 <label htmlFor="address" className="form-label">Address</label>
+                                <span className="ms-2" style={{color: "red", fontSize: "20px"}}>*</span>
                             </div>
                             <textarea className="form-control" placeholder="Type Address here" rows="3" id="address" onChange={handleInputChange}>
                             </textarea>

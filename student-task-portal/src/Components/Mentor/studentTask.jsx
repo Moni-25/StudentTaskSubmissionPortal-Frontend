@@ -7,20 +7,20 @@ export default function StudentTaskDetails()
 {
     const location = useLocation();
     const data1  = location.state;
-    console.log(data1.stu, data1.mentor)
+    //console.log(data1.stu, data1.mentor)
     const data = data1.mentor;
     const student = data1.stu;
     const navigate = useNavigate();
     const { studentDetails = [] } = useContext(studentContext);
     const { taskItem = [] } = useContext(taskContext);
-    console.log(taskItem)
+    //console.log(taskItem)
     const [formData, setFormData] = useState();
     let mark = "", comm = "";
     function handleTaskInput(e)
     {
         // mark = document.getElementById("task_mark").value;
         // comm = document.getElementById("mentor_comment").value;
-        console.log(e.target.value, e.target.id)
+        //console.log(e.target.value, e.target.id)
         if (e) {
             const formCopy = {
               ...formData,
@@ -30,7 +30,7 @@ export default function StudentTaskDetails()
           }
           //console.log("hi",mark, comm)
     }
-    console.log("hi",mark, comm)
+    //console.log("hi",mark, comm)
     var no_record = "false";
     {taskItem.map(({studentId},i) => {
         if(data1.stu === studentId.studentFullName)
@@ -38,21 +38,21 @@ export default function StudentTaskDetails()
             no_record = "true";
         }
     })}
-    console.log(no_record)
+    //console.log(no_record)
     function handleMentor(e)
     {
         e.preventDefault();
-        console.log(e.target.value, e.target.id)
+        //console.log(e.target.value, e.target.id)
         let taskId = 0;
         let taskname = document.getElementById("taskName").value;
-        console.log(taskname, "task");
+        //console.log(taskname, "task");
         taskItem.map((taskVal,i) => {
             if(e.target.value === taskVal.task_name)
             {
                 taskId = taskVal._id;            
             }
         })
-        console.log(taskId)
+        //console.log(taskId)
         fetch(`https://studenttasksubmissionportal-database.onrender.com/api/task/update/${taskId}`,{
             headers: {
                 Accept: "application/json",

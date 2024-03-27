@@ -8,7 +8,7 @@ export default function AdminPortal()
     const location = useLocation();
     const { fromHome } = location.state;
     let data = fromHome.data;
-    console.log(data)
+    //console.log(data)
     return(
         <>
             <nav className="navbar navbar-expand-lg bg-primary">

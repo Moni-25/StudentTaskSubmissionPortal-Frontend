@@ -7,7 +7,7 @@ export default function MentorList()
     const location = useLocation();
     const { fromHome } = location.state;
     let data = fromHome.data;
-    console.log(data)
+    //console.log(data)
     const {mentorDetails = []} = useContext(mentorContext);
     return(
         <>
@@ -61,14 +61,14 @@ export default function MentorList()
                 left: "50%",
                 transform: "translate(-50%, 0%)"
             }}>
-                 <table className="table table-borderless table-hover">
+            <table className="table table-bordered table-hover" style={{border : "2px solid #66b3ff"}}>
             <thead>
               <tr className="table-danger text-center">
                 <th>Sl.No</th>
                 <th>Mentor Name</th>
                 <th>Email</th>
                 <th>Phone Number</th>
-                <th colSpan="4">Address</th>
+                <th colSpan="4">Course Name</th>
               </tr>
             </thead>
             {mentorDetails.map(({address, mentorName,mentor_email,mentor_phoneNo, studentId}, i) => (

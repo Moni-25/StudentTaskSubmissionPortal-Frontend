@@ -8,7 +8,7 @@ export default function RoadMap({courseDayValue = {}, state = {}})
     const location = useLocation();
     const { fromHome } = location.state;
     let data = fromHome.data;
-    console.log("Roadmap", data);
+    //console.log("Roadmap", data);
     const navigate = useNavigate();
     const values = data;
     const {courseItems = []} = useContext(courseContext);
@@ -20,7 +20,7 @@ export default function RoadMap({courseDayValue = {}, state = {}})
 
         // Day 1 Course 
         {val === "1" ? navigate("/day1", {state:{fromHome: { data }}}): "hello"}
-        console.log(val)
+        //console.log(val)
         // Day 2 Course 
         {val === "2" ? navigate("/day2", {state:{fromHome: { data }}}): "hello"}
         // Day 3 Course 
@@ -39,7 +39,7 @@ export default function RoadMap({courseDayValue = {}, state = {}})
         {val === "9" ? navigate("/day9", {state:{fromHome: { data }}}): "hello"}   
     }
    
-    console.log(courseItems.data.length, "hi")
+    //console.log(courseItems.data.length, "hi")
     return (
         <>
             <button type="button" value={courseDayValue.id} id={courseDayValue.id} className="btn btn-outline-primary btn-circle btn-xl"

@@ -10,7 +10,7 @@ export default function HtmlRoadMap({htmlValue = {}, state = {}})
     const location = useLocation();
     const { fromHome } = location.state;
     let data = fromHome.data;
-    console.log("Roadmap", data);
+    //console.log("Roadmap", data);
     const navigate = useNavigate();
     const values = data;
     const {courseItems = []} = useContext(courseContext);
@@ -23,7 +23,7 @@ export default function HtmlRoadMap({htmlValue = {}, state = {}})
 
         // Day 1 Course 
         {val === "1" ? navigate("/htmlday1", {state:{fromHome: { data }}}): "hello"}
-        console.log(val)
+        //console.log(val)
         // Day 2 Course 
         {val === "2" ? navigate("/htmlday2", {state:{fromHome: { data }}}): "hello"}
         // Day 3 Course 
@@ -42,7 +42,7 @@ export default function HtmlRoadMap({htmlValue = {}, state = {}})
         {val === "9" ? navigate("/day9", {state:{fromHome: { data }}}): "hello"}   
     }
    
-    console.log(courseItems.data.length, "hi")
+    //console.log(courseItems.data.length, "hi")
     return (
         <>
             <button type="button" value={htmlValue.id} id={htmlValue.id} className="btn btn-outline-primary btn-circle btn-xl"
