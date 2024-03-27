@@ -47,8 +47,8 @@ export default function StudentList()
                 <th>Task</th>
               </tr>
             </thead>
-                   
-          {mentorDetails.map(({mentorName, studentId}, i) => (
+              {mentorDetails.length === 0 ?      
+          (mentorDetails.map(({mentorName, studentId}, i) => (
             <tbody>
             {data == mentorName ?
                 studentId.map(({studentFullName,email, phoneNumber, courseName}, index) => (  //console.log(data.Description)) )                        
@@ -72,7 +72,7 @@ export default function StudentList()
                 ))
             : ""}   
             </tbody>
-          ))}
+          ))) : "0"}
 
             {/* {taskItem.map(({studentId}, i) => (
             <tbody>
