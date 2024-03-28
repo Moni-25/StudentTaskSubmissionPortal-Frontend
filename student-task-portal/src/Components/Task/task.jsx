@@ -107,8 +107,7 @@ export default function Task({val = {}})
         {
             id = 1;
             sub_link = t.submission_link;
-            //console.log(t.task_name.length, val.length, t.submission_link);
-            
+            //console.log(t.task_name.length, val.length, t.submission_link);            
         }
     }
     })
@@ -119,10 +118,20 @@ export default function Task({val = {}})
             taskItem.map(t => {
             for(let j = 0; j < (s.taskName).length; j++){
                 //console.log(s.taskName[j])
-            if(data === s.stu_username && val !== s.taskName[j])
+            // if(data === s.stu_username && val !== s.taskName[j])
+            // {
+            //     id = 0;
+            //     //console.log(id, "ID")
+            // }
+            if(data === t.studentId.stu_username)
             {
-                id = 0;
-                //console.log(id, "ID")
+                if(t.task_name === val){
+                    //console.log(t.task_status, t.submission_date, val)
+                    if(t.submission_date === undefined){
+                    id = 0;
+                    //console.log(id, "ID", t.task_name, t.task_status)
+                    }
+                }
             }
            
             if(data === t.studentId.stu_username && val === s.taskName[j])

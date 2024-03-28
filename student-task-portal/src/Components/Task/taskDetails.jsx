@@ -7,19 +7,26 @@ export default function TaskDetails({state = {}})
     const location = useLocation();
     const { fromHome } = location.state;
     let data = fromHome.data;
-    console.log(data)
+    //console.log(data)
     const {taskItem = []} = useContext(taskContext);
-    console.log(taskItem)
-    let keys;
+    //console.log(taskItem)
+    let keys, len = 0;
     taskItem.map((alltask, index1) => {
         keys={index1}
-        console.log(alltask.task_link, alltask.comments, alltask.studentId.stu_username, 
-            alltask.submission_date, alltask.task_mark);
+        //console.log(data, alltask.studentId.stu_username)
+        if(data === alltask.studentId.stu_username)
+        {
+            len = len + 1;
+            //console.log(len)
+        }
+        // console.log(alltask.task_link, alltask.comments, alltask.studentId.stu_username, 
+        //     alltask.submission_date, alltask.task_mark);
     })
 
     return(
         <>
-        {taskItem.map((alltask, index) => (data === alltask.studentId.stu_username ?
+        {len > 0 ?
+        (taskItem.map((alltask, index) => (data === alltask.studentId.stu_username ?
             <div className="card mt-2 mb-2" style={{margin: "auto", width: "60%", border: "2px solid #73AD21", padding: "10px"}}>
                 {/* <div className="card-header">
                     Featured
@@ -59,7 +66,12 @@ export default function TaskDetails({state = {}})
                     </div>
                 </div>
             </div>
-        : "" ))}
+        : "" ))) : 
+        <div className="card mt-2 mb-2" style={{margin: "auto", width: "60%", border: "2px solid #73AD21", padding: "10px"}}>
+            <div className="card-body text-center" style={{fontSize: "20px"}}>
+            No Task Submit Yet
+            </div>
+        </div>}
         </>
     )
 }

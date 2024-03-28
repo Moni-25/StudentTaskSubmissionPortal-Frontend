@@ -6,7 +6,7 @@ import { studentContext } from "../../Context/getStudentContext";
 export default function Stu()
 {
     const {studentDetails = []} = useContext(studentContext);
-    console.log(studentDetails)
+    //console.log(studentDetails)
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -55,13 +55,13 @@ export default function Stu()
         let users = "";
         if (validateForm()) {
             // Form is valid, you can submit or process the data here
-            console.log("Form data:", formData);
+            //console.log("Form data:", formData);
             setSubmitted(true); // Set a submitted flag
           }
-        console.log("Form data:", formData);
+        //console.log("Form data:", formData);
         const user = formData.studentUsername;
         const pass = formData.studentPassword;
-        console.log(user, pass, "student", studentDetails);
+        //console.log(user, pass, "student", studentDetails);
         studentDetails.map((stuData, index) => {
             if(user === stuData.stu_username && pass === stuData.stu_password){
                 login_status = "true";
@@ -70,9 +70,9 @@ export default function Stu()
         }
         )
         const data = {users}
-        console.log(login_status)
+        //console.log(login_status)
         if(login_status === "true"){
-            console.log(`${users} Login Successfully!!!`);
+            //console.log(`${users} Login Successfully!!!`);
             alert(`${users} Logged In Successfully!!!`);
             navigate("/student_portal", {state: data});
         }

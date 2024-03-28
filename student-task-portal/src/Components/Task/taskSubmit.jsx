@@ -8,12 +8,12 @@ export default function TaskSubmit()
     const location = useLocation();
     const { fromHome } = location.state;
     let data = fromHome.data;
-    console.log(data)
+    //console.log(data)
 
     const {taskItem = []} = useContext(taskContext);
-    console.log(taskItem)
+    //console.log(taskItem)
     taskItem.map((alltask, index) => {
-        console.log(alltask.task_link, alltask.comments);
+        //console.log(alltask.task_link, alltask.comments);
     })
 
     return (

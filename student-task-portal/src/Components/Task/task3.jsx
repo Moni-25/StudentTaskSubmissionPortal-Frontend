@@ -8,7 +8,7 @@ export default function TaskThree({val = {}})
     const location = useLocation();
     const { fromHome } = location.state;
     let data = fromHome.data;
-    console.log("Day3-Task",data, val);
+    //console.log("Day3-Task",data, val);
 
     const navigate = useNavigate();
 
@@ -50,18 +50,18 @@ export default function TaskThree({val = {}})
     function handleTaskInput(e)
     {
         //e.preventDefault();
-        console.log(e.target.id, e.target.value);
-        console.log(taskItem.length)
+        //console.log(e.target.id, e.target.value);
+        //console.log(taskItem.length)
         studentDetails.map((task, index) => {
             if(data === task.stu_username){
                 login_status = "true";
                 stuId = task._id;
-                console.log(task.stu_username, login_status, stuId)
+                //console.log(task.stu_username, login_status, stuId)
             }
         }
         )
         let submit = document.getElementById("task_link").getAttribute("href");
-        console.log("Submit", submit)
+        //console.log("Submit", submit)
         const { name, value } = e.target;
         if (e) {
             const taskCopy = {
@@ -107,23 +107,28 @@ export default function TaskThree({val = {}})
         {
             id = 1;
             sub_link = t.submission_link;
-            console.log(t.task_name.length, val.length, t.submission_link);
+            //console.log(t.task_name.length, val.length, t.submission_link);
             
         }
     }
     })
-    console.log(id, sub_link);
+    //console.log(id, sub_link);
     function handleTaskSumbission(e)
     {
         {studentDetails.map(s => {
             taskItem.map(t => {
             for(let j = 0; j < (s.taskName).length; j++){
-                console.log(s.taskName[j])
-            if(data === s.stu_username && val !== s.taskName[j])
-            {
-                id = 0;
-                console.log(id, "ID")
-            }
+                //console.log(s.taskName[j])
+                if(data === t.studentId.stu_username)
+                {
+                    if(t.task_name === val){
+                        //console.log(t.task_status, t.submission_date, val)
+                        if(t.submission_date === undefined){
+                        id = 0;
+                        //console.log(id, "ID", t.task_name, t.task_status)
+                        }
+                    }
+                }
            
             if(data === t.studentId.stu_username && val === s.taskName[j])
             {
@@ -132,17 +137,18 @@ export default function TaskThree({val = {}})
                     id = 1;
                     taskId = t._id;
                     sub_link = t.submission_link;
-                    console.log(s.courseName.length, val.length, s.taskName[j]);  
+                    //console.log(s.courseName.length, val.length, s.taskName[j]);  
                 }
             }
             
         }})
         })
-        console.log(id, sub_link);
-        console.log(taskId, "Task Id", id);}
+        //console.log(id, sub_link);
+        //console.log(taskId, "Task Id", id);
+    }
         if (validateForm()) {
             // Form is valid, you can submit or process the data here
-            console.log("Form data:", formData);
+            //console.log("Form data:", formData);
             setSubmitted(true); // Set a submitted flag
           }
         if(id === 0)
@@ -157,7 +163,7 @@ export default function TaskThree({val = {}})
             .then((response) => response.json())
             .then((response) => {if(response.message === "Task Submitted Successfully!!!")
             {
-                console.log(msg)
+                //console.log(msg)
                 alert(`Hi ${data}, You had submitted task successfully!!!`);
                 navigate("/day3", {state:{fromHome: { data }}});
                 window.location.reload();

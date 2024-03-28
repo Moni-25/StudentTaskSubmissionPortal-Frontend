@@ -121,9 +121,16 @@ export default function HtmlTaskFive({val = {}})
                 //console.log(s.taskName[j])
             if(data === s.stu_username)
             {
+                // if(t.task_name === val){
+                //     id = id+1;
+                //     //console.log(id, "ID")
+                // }
                 if(t.task_name === val){
-                    id = id+1;
-                    //console.log(id, "ID")
+                    //console.log(t.task_status, t.submission_date, val)
+                    if(t.submission_date === undefined){
+                    id = 0;
+                    //console.log(id, "ID", t.task_name, t.task_status)
+                    }
                 }
             }
            
