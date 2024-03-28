@@ -20,6 +20,18 @@ export default function StudentList()
     }
     ]
     //console.log(mentorDetails)
+    var len = 0;
+    mentorDetails.map(menlen => {
+      if(data === menlen.mentorName)
+        {       
+          if(menlen.studentId.length !== 0)
+          {
+              len = 1;
+              console.log(len, menlen.studentId.length)
+          }
+        }
+    })
+    console.log(len)
     mentorDetails.map((menData, index) => {
         //console.log("Data", data, menData.mentorName)
         for(let i = 0; i < (menData.studentId).length; i++)
@@ -30,10 +42,9 @@ export default function StudentList()
                 email[i] = menData.studentId[i].email;
                 stuName[i] = menData.studentId[i].studentFullName;
             }
-          } 
-        
-});
-     //console.log("Email", email, men)
+          }   
+      });
+     //console.log("Email", email, men, len)
     return(
         <div className="mt-5">
           <table className="table table-bordered table-hover" style={{border: "2px solid #66b3ff"}}>
@@ -47,7 +58,7 @@ export default function StudentList()
                 <th>Task</th>
               </tr>
             </thead>
-              {mentorDetails.length === 0 ?      
+              {len === 1 ?      
           (mentorDetails.map(({mentorName, studentId}, i) => (
             <tbody>
             {data == mentorName ?
