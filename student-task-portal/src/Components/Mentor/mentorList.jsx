@@ -68,7 +68,7 @@ export default function MentorList()
                 <th>Mentor Name</th>
                 <th>Email</th>
                 <th>Phone Number</th>
-                <th colSpan="4">Course Name</th>
+                <th colSpan="4">Student Name - Course</th>
               </tr>
             </thead>
             {mentorDetails.map(({address, mentorName,mentor_email,mentor_phoneNo, studentId}, i) => (
@@ -80,7 +80,7 @@ export default function MentorList()
                     <td>{mentor_phoneNo}</td>
                     {studentId.length !== 0 ? 
                     studentId.map(({studentFullName,email, phoneNumber, courseName}, index) => ( 
-                    <td>{courseName}</td>
+                    <td>{studentFullName} - {courseName}</td>
                     ))
                     : <td>Course Not Assigned Yet</td>}
                   </tr>           
