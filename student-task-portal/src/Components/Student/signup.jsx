@@ -168,6 +168,7 @@ export default function SignUp()
                         <div className="row-lg-12 d-flex">
                             <div className="col-lg-4">
                                 <label htmlFor="fullname" className="form-label">Fullname</label>
+                                <span className="ms-2" style={{color: "red", fontSize: "20px"}}>*</span>
                             </div>
                             <input type="text" className="form-control" id="studentFullName" name="name" placeholder="Enter Fullname" onChange={handleInputChange}/>
                         </div>
@@ -182,6 +183,7 @@ export default function SignUp()
                         <div className="row-lg-12 mt-3 d-flex">
                             <div className="col-lg-4">
                                 <label htmlFor="email" className="form-label">Email</label>
+                                <span className="ms-2" style={{color: "red", fontSize: "20px"}}>*</span>
                             </div>
                             <input type="text" className="form-control" id="email" name="email" placeholder="email@gmail.com" onChange={handleInputChange}/>
                         </div>
@@ -196,6 +198,7 @@ export default function SignUp()
                         <div className="row-lg-12 mt-3 d-flex">
                             <div className="col-lg-4">
                                 <label htmlFor="stu_username" className="form-label">Username</label>
+                                <span className="ms-2" style={{color: "red", fontSize: "20px"}}>*</span>
                             </div>
                             <input type="text" className="form-control" id="stu_username" name="user" placeholder="Username" onChange={handleInputChange}/>
                         </div>
@@ -210,6 +213,7 @@ export default function SignUp()
                         <div className="row-lg-12 mt-3 d-flex">
                             <div className="col-lg-4">
                                 <label htmlFor="stu_password" className="form-label">Password</label>
+                                <span className="ms-2" style={{color: "red", fontSize: "20px"}}>*</span>
                             </div>
                             <input type="password" className="form-control" id="stu_password" name="pass" placeholder="Password" onChange={handleInputChange}/>
                         </div>
@@ -224,6 +228,7 @@ export default function SignUp()
                         <div className="row-lg-12 mt-3 d-flex">
                             <div className="col-lg-4">
                                 <label htmlFor="phoneno" className="form-label">Phone Number</label>
+                                <span className="ms-2" style={{color: "red", fontSize: "20px"}}>*</span>
                             </div>
                             <input type="text" name="phone" className="form-control" id="phoneNumber" placeholder="+91 9078563412" onChange={handleInputChange}/>
                         </div>
@@ -238,6 +243,7 @@ export default function SignUp()
                         <div className="row-lg-12 mt-3 d-flex">
                             <div className="col-lg-4">
                                 <label htmlFor="coursename" className="form-label">Course Name</label>
+                                <span className="ms-2" style={{color: "red", fontSize: "20px"}}>*</span>
                             </div>
                             <select class="form-select" aria-label="Default select" id="courseName" name="course"
                                 onChange={handleInputChange}>

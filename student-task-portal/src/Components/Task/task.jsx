@@ -125,7 +125,7 @@ export default function Task({val = {}})
             // }
             if(data === t.studentId.stu_username)
             {
-                if(t.task_name === val){
+                if(t.task_name !== val){
                     //console.log(t.task_status, t.submission_date, val)
                     if(t.submission_date === undefined){
                     id = 0;
