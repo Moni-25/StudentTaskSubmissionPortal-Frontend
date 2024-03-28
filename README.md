@@ -8,7 +8,7 @@ I. Student Login
 
    ![Screenshot 2024-03-21 151651](https://github.com/Moni-25/StudentTaskSubmissionPortal-Frontend/assets/150880555/96cb976a-c205-4335-835a-49ebcf5599b0)
    
-3. You have to fill all details in the student registration form otherwise it will validation error
+3. You have to fill all details in the student registration form otherwise it will show validation error
 
    ![Screenshot 2024-03-28 125919](https://github.com/Moni-25/StudentTaskSubmissionPortal-Frontend/assets/150880555/ec1424cf-e7ce-425b-8f5b-474735cf2a80)
 
