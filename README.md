@@ -34,7 +34,7 @@ I. Student Login
 
 7. In Javascript Course, You have follow below guideline for submit your task
    1. First select your course map, if you click 1 means it will show day-1 class details and day-1 task also, simillarly you have to follow all task
-      ![Screenshot 2024-03-21 151909](https://github.com/Moni-25/StudentTaskSubmissionPortal-Frontend/assets/150880555/9779cacd-dcd7-4b8c-8adf-0dbffa6a4622)
+      ![Screenshot 2024-03-28 132926](https://github.com/Moni-25/StudentTaskSubmissionPortal-Frontend/assets/150880555/b58f9606-c4c1-4371-9096-3154121f161c)
 
       ![Screenshot 2024-03-21 151915](https://github.com/Moni-25/StudentTaskSubmissionPortal-Frontend/assets/150880555/26dac598-0c58-4a10-a207-0fa6621ce3d6)
 
